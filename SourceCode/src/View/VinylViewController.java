@@ -2,7 +2,7 @@ package View;
 
 import Model.Vinyl;
 import Model.User;
-import ViewModel.VinylViewModel;
+import your.correct.package.VinylViewModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 

@@ -1,8 +1,7 @@
 package States;
 import Model.*;
 
-public class BorrowedAndReservedState
-{
+
   public class BorrowedAndReservedState implements VinylState {
     public BorrowedAndReservedState(Vinyl vinyl) {
       System.out.println(" ");
@@ -34,4 +33,3 @@ public class BorrowedAndReservedState
     }
   }
 
-}

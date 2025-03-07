@@ -98,6 +98,10 @@ public class Vinyl
   {
   }
 
+  public void changeToBorrowedAndReservedState()
+  {
+  }
+
   public void changeToAvailableAndReservedState()
   {
   }
