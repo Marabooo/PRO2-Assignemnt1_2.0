@@ -1,4 +1,5 @@
 package States;
+import Model.*;
 
 public class AvailableAndReservedState implements VinylState {
   public AvailableAndReservedState(Vinyl vinyl) { /* compiled code */ }

@@ -1,4 +1,5 @@
 package States;
+import Model.*;
 
 public class AvailableState implements VinylState {
   public AvailableState() {

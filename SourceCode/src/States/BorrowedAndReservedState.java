@@ -1,4 +1,5 @@
 package States;
+import Model.*;
 
 public class BorrowedAndReservedState
 {
