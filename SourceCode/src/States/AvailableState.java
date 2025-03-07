@@ -13,6 +13,7 @@ public class AvailableState implements VinylState {
   }
 
   public void onReturnButtonPress(Vinyl vinyl) {
+    // do nothing
   }
 
   public void onReserveButtonPress(Vinyl vinyl) {
@@ -21,6 +22,7 @@ public class AvailableState implements VinylState {
   }
 
   public void onUnreserveButtonPress(Vinyl vinyl) {
+    // do nothing
   }
 
   public void onMarkForRemovalButtonPress(Vinyl vinyl) {

@@ -2,6 +2,7 @@ package States;
 import Model.*;
 
 public class BorrowedState implements VinylState {
+  
   public BorrowedState(Vinyl vinyl) {
     System.out.println(" ");
     System.out.println(" Vinyl is Borrowed ");

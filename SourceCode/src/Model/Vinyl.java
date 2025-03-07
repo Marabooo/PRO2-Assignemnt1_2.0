@@ -12,7 +12,7 @@ public class Vinyl
   private int id;
   private boolean isReserved;
   private boolean isBorrowed;
-  private VinylState state;
+  private VinylState currentState;
 
 
   public Vinyl(String title, String artist, int releaseYear)
@@ -20,11 +20,12 @@ public class Vinyl
     this.title = title;
     this.artist = artist;
     this.releaseYear = releaseYear;
-    this.state = new AvailableState();
+    this.currentState = new AvailableState();
     this.isReserved = false;
     this.isBorrowed = false;
     this.id = nextId++;
   }
+
   //
   //setters and getters
   //
@@ -58,8 +59,7 @@ public class Vinyl
     return id;
   }
 
-  public boolean isReserved()
-  {
+  public boolean isReserved(){
     return isReserved;
   }
   public void setReserved(boolean reserved)
@@ -76,50 +76,45 @@ public class Vinyl
     isBorrowed = borrowed;
   }
 
-  public VinylState getState()
-  {
-    return state;
+  public VinylState getState(){
+    return currentState;
   }
-
-  public void setState(VinylState state)
-  {
-    this.state = state;
-  }
+  
 
   //
-  //State methods
+  // State methods
   //
 
-  public void changeToAvailableState()
-  {
+  public void changeToAvailableState(){
+    currentState = new AvailableState();
   }
 
-  public void changeToBorrowedState()
-  {
+  public void changeToBorrowedState(){
+    currentState = new BorrowedState(this);
   }
 
-  public void changeToBorrowedAndReservedState()
-  {
+  public void changeToBorrowedAndReservedState(){
+    currentState = new BorrowedAndReservedState(this);
   }
 
-  public void changeToAvailableAndReservedState()
-  {
+  public void changeToAvailableAndReservedState(){
+    currentState = new AvailableAndReservedState(this);
   }
 
  //
- //Button methods
+ // Button methods
  //
 
 
 //
-//toString, equals and hashCode
+// toString, equals and hashCode
 //
 
   @Override public String toString()
   {
     return "Vinyl{" + "title='" + title + '\'' + ", artist='" + artist + '\''
         + ", releaseYear=" + releaseYear + ", id=" + id + ", isReserved="
-        + isReserved + ", isBorrowed=" + isBorrowed + ", state=" + state + '}';
+        + isReserved + ", isBorrowed=" + isBorrowed + ", state=" + currentState + '}';
   }
 
   @Override public boolean equals(Object o)
@@ -130,14 +125,14 @@ public class Vinyl
     return releaseYear == vinyl.releaseYear && id == vinyl.id
         && isReserved == vinyl.isReserved && isBorrowed == vinyl.isBorrowed
         && Objects.equals(title, vinyl.title) && Objects.equals(artist,
-        vinyl.artist) && Objects.equals(state, vinyl.state);
+        vinyl.artist) && Objects.equals(currentState, vinyl.currentState);
   }
 
   @Override public int hashCode()
   {
     return Objects.hash(title, artist, releaseYear, id, isReserved, isBorrowed,
-        state);
+        currentState);
   }
-  // Mara and Ana
+  
 
 }

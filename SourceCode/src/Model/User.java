@@ -42,7 +42,6 @@ public class User
   {
     return Objects.hash(name, id);
   }
-  // to string
-    // equals
+
 
 }
