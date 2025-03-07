@@ -12,9 +12,7 @@ public class Vinyl
   private int releaseYear;
   private static int nextId = 1;
   private int id;
-  private boolean isReserved;
   private Integer reservedBy;
-  private boolean isBorrowed;
   private Integer borrowedBy;
   private VinylState currentState;
   private boolean isMarkedForRemoval;
@@ -29,9 +27,7 @@ public class Vinyl
     this.artist = artist;
     this.releaseYear = releaseYear;
     this.currentState = new AvailableState();
-    this.isReserved = false;
     this.reservedBy = null;
-    this.isBorrowed = false;
     this.borrowedBy = null;
     this.isMarkedForRemoval = false;
     this.id = nextId++;
@@ -70,31 +66,27 @@ public class Vinyl
     return id;
   }
 
-  public boolean isReserved()
+
+
+  public void setReservedBy( User user)
   {
-    return isReserved;
-  }
-  public void setReserved(boolean reserved, User user)
-  {
-    if (isReserved || isMarkedForRemoval)
+    if (reservedBy != null || isMarkedForRemoval)
     {
       throw new IllegalArgumentException("Vinyl cannot be reserved.");
     }
-    isReserved = reserved;
     reservedBy = user.getId();
   }
 
-  public boolean isBorrowed()
+
+  
+
+
+  public void setBorrowed(User user)
   {
-    return isBorrowed;
-  }
-  public void setBorrowed(boolean borrowed, User user)
-  {
-    if (isBorrowed || (isReserved && reservedBy != user.getId())|| (isMarkedForRemoval && !isReserved))
+    if (borrowedBy != null || (reservedBy != null && reservedBy != user.getId())|| (isMarkedForRemoval && reservedBy == null))
     {
       throw new IllegalArgumentException("Vinyl cannot be borrowed.");
     }
-    isBorrowed = borrowed;
     borrowedBy = user.getId();
   }
 
@@ -165,13 +157,13 @@ public class Vinyl
   public void onUnreserveButtonPress(){
     currentState.onUnreserveButtonPress(this);
   }
-  public void onMarkForRemovalButtonPress(){
+  /*public void onMarkForRemovalButtonPress(){
     currentState.onMarkForRemovalButtonPress(this);
   }
   public void onUnmarkForRemovalButtonPress(){
     currentState.onUnmarkForRemovalButtonPress(this);
   }
-
+*/
 
 //
 //Listener methods
@@ -205,22 +197,9 @@ public class Vinyl
         + ", releaseYear=" + releaseYear + ", id=" + id + ", state=" + currentState + '}';
   }
 
-  @Override public boolean equals(Object o)
-  {
-    if (o == null || getClass() != o.getClass())
-      return false;
-    Vinyl vinyl = (Vinyl) o;
-    return releaseYear == vinyl.releaseYear && id == vinyl.id
-        && isReserved == vinyl.isReserved && isBorrowed == vinyl.isBorrowed
-        && Objects.equals(title, vinyl.title) && Objects.equals(artist,
-        vinyl.artist) && Objects.equals(currentState, vinyl.currentState);
-  }
+  // generate equals and hashCode
+  
 
-  @Override public int hashCode()
-  {
-    return Objects.hash(title, artist, releaseYear, id, isReserved, isBorrowed,
-        currentState);
-  }
   // Mara and Ana
 
 }
