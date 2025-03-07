@@ -12,7 +12,12 @@ public class Vinyl
   private int id;
   private boolean isReserved;
   private boolean isBorrowed;
+<<<<<<< Updated upstream
   private VinylState currentState;
+=======
+  private boolean isMarkedForRemoval;
+  private VinylState state;
+>>>>>>> Stashed changes
 
 
   public Vinyl(String title, String artist, int releaseYear)
@@ -23,6 +28,7 @@ public class Vinyl
     this.currentState = new AvailableState();
     this.isReserved = false;
     this.isBorrowed = false;
+    this.isMarkedForRemoval = false;
     this.id = nextId++;
   }
 
@@ -76,8 +82,28 @@ public class Vinyl
     isBorrowed = borrowed;
   }
 
+<<<<<<< Updated upstream
   public VinylState getState(){
     return currentState;
+=======
+  public boolean isMarkedForRemoval()
+  {
+    return isMarkedForRemoval;
+  }
+  public void setMarkedForRemoval(boolean markedForRemoval)
+  {
+    isMarkedForRemoval = markedForRemoval;
+  }
+
+  public VinylState getState()
+  {
+    return state;
+  }
+
+  public void setState(VinylState state)
+  {
+    this.state = state;
+>>>>>>> Stashed changes
   }
   
 
