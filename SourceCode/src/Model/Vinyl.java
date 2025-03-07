@@ -18,7 +18,7 @@ public class Vinyl
 
 
 
-  public Vinyl(String title, String artist, int releaseYear)
+  public Vinyl(int i, String title, String artist, int releaseYear)
   {
     this.title = title;
     this.artist = artist;

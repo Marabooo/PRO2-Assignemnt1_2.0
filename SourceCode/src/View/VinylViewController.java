@@ -2,20 +2,20 @@ package View;
 
 import Model.Vinyl;
 import Model.User;
-import your.correct.package.VinylViewModel;
+import ViewModel.ViewModel;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 public class VinylViewController {
   @FXML private TableView<Vinyl> vinylTable;
-  @FXML private TableColumn<Vinyl, String> nameColumn;
+  @FXML private TableColumn<Vinyl, String> titleColumn;
   @FXML private TableColumn<Vinyl, String> artistColumn;
   @FXML private TableColumn<Vinyl, Integer> releaseYearColumn;
-  @FXML private TableColumn<Vinyl, Integer> vinylIdColumn;
+  @FXML private TableColumn<Vinyl, Integer> stateColumn;
 
-  private VinylViewModel viewModel;
+  private ViewModel viewModel;
 
-  public void initViewModel(VinylViewModel viewModel) {
+  public void initViewModel(ViewModel viewModel) {
     this.viewModel = viewModel;
     vinylTable.setItems(viewModel.getVinyls()); // Bind ViewModel to TableView
   }
@@ -24,7 +24,7 @@ public class VinylViewController {
   public void borrowVinyl() {
     Vinyl selected = vinylTable.getSelectionModel().getSelectedItem();
     if (selected != null) {
-      viewModel.borrowVinyl(selected.getVinylId());
+      viewModel.borrowVinyl(selected.getId());
     }
   }
 
@@ -32,16 +32,16 @@ public class VinylViewController {
   public void reserveVinyl() {
     Vinyl selected = vinylTable.getSelectionModel().getSelectedItem();
     if (selected != null) {
-      User user = new User("Test User", selected.getReservingUserId()); // Hardcoded for now
-      viewModel.reserveVinyl(selected.getVinylId(), user);
+      viewModel.reserveVinyl(selected.getId(), 1);  // Assuming user ID is needed
     }
+
   }
 
   @FXML
   public void returnVinyl() {
     Vinyl selected = vinylTable.getSelectionModel().getSelectedItem();
     if (selected != null) {
-      viewModel.returnVinyl(selected.getVinylId());
+      viewModel.returnVinyl(selected.getId());
     }
   }
 }
