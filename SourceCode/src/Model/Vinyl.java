@@ -1,6 +1,8 @@
 package Model;
 import States.*;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.util.Objects;
 
 public class Vinyl
@@ -10,11 +12,12 @@ public class Vinyl
   private int releaseYear;
   private static int nextId = 1;
   private int id;
-  private boolean isReserved;
-  private boolean isBorrowed;
+  private Integer reservedBy;
+  private Integer borrowedBy;
   private VinylState currentState;
   private boolean isMarkedForRemoval;
-  private VinylState state;
+  //private VinylState state; //can lead to confusions
+  private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
 
 
 
@@ -24,8 +27,8 @@ public class Vinyl
     this.artist = artist;
     this.releaseYear = releaseYear;
     this.currentState = new AvailableState();
-    this.isReserved = false;
-    this.isBorrowed = false;
+    this.reservedBy = null;
+    this.borrowedBy = null;
     this.isMarkedForRemoval = false;
     this.id = nextId++;
   }
@@ -63,22 +66,28 @@ public class Vinyl
     return id;
   }
 
-  public boolean isReserved()
+
+
+  public void setReservedBy( User user)
   {
-    return isReserved;
-  }
-  public void setReserved(boolean reserved)
-  {
-    isReserved = reserved;
+    if (reservedBy != null || isMarkedForRemoval)
+    {
+      throw new IllegalArgumentException("Vinyl cannot be reserved.");
+    }
+    reservedBy = user.getId();
   }
 
-  public boolean isBorrowed()
+
+  
+
+
+  public void setBorrowed(User user)
   {
-    return isBorrowed;
-  }
-  public void setBorrowed(boolean borrowed)
-  {
-    isBorrowed = borrowed;
+    if (borrowedBy != null || (reservedBy != null && reservedBy != user.getId())|| (isMarkedForRemoval && reservedBy == null))
+    {
+      throw new IllegalArgumentException("Vinyl cannot be borrowed.");
+    }
+    borrowedBy = user.getId();
   }
 
   public VinylState getState()
@@ -96,61 +105,101 @@ public class Vinyl
 
   public void setState(VinylState state)
   {
-    this.state = state;
+    VinylState oldState = currentState;
+    this.currentState = state;
+    firePropertyChange("state", oldState, currentState);
   }
 
   //
   // State methods
   //
 
-  public void changeToAvailableState(){
+  public void changeToAvailableState()
+  {
+    VinylState oldState = currentState;
     currentState = new AvailableState();
+    firePropertyChange("state", oldState, currentState);
   }
 
-  public void changeToBorrowedState(){
+  public void changeToBorrowedState()
+  {
+    VinylState oldState = currentState;
     currentState = new BorrowedState(this);
+    firePropertyChange("state", oldState, currentState);
   }
 
-  public void changeToBorrowedAndReservedState(){
+  public void changeToBorrowedAndReservedState()
+  {
+    VinylState oldState = currentState;
     currentState = new BorrowedAndReservedState(this);
+    firePropertyChange("state", oldState, currentState);
   }
 
-  public void changeToAvailableAndReservedState(){
+  public void changeToAvailableAndReservedState()
+  {
+    VinylState oldState = currentState;
     currentState = new AvailableAndReservedState(this);
+    firePropertyChange("state", oldState, currentState);
   }
 
  //
  // Button methods
  //
-
+  public void onBorrowButtonPress(){
+    currentState.onBorrowButtonPress(this);
+  }
+  public void onReturnButtonPress(){
+    currentState.onReturnButtonPress(this);
+  }
+  public void onReserveButtonPress(){
+    currentState.onReserveButtonPress(this);
+  }
+  public void onUnreserveButtonPress(){
+    currentState.onUnreserveButtonPress(this);
+  }
+  /*public void onMarkForRemovalButtonPress(){
+    currentState.onMarkForRemovalButtonPress(this);
+  }
+  public void onUnmarkForRemovalButtonPress(){
+    currentState.onUnmarkForRemovalButtonPress(this);
+  }
+*/
 
 //
+//Listener methods
+//
+
+  public void addPropertyChangeListener(PropertyChangeListener listener)
+  {
+    pcs.addPropertyChangeListener(listener);
+  }
+
+  public void removePropertyChangeListener(PropertyChangeListener listener)
+  {
+    pcs.removePropertyChangeListener(listener);
+  }
+
+  // Notify listeners about the change
+  public void firePropertyChange(String propertyName, Object oldValue,
+      Object newValue)
+  {
+    pcs.firePropertyChange(propertyName, oldValue, newValue);
+  } //allows us to implement the Observer Pattern and separate the application logic from the graphical interface.
+
+
+  //
 // toString, equals and hashCode
 //
 
   @Override public String toString()
   {
     return "Vinyl{" + "title='" + title + '\'' + ", artist='" + artist + '\''
-        + ", releaseYear=" + releaseYear + ", id=" + id + ", isReserved="
-        + isReserved + ", isBorrowed=" + isBorrowed + ", state=" + currentState + '}';
+        + ", releaseYear=" + releaseYear + ", id=" + id + ", state=" + currentState + '}';
   }
 
-  @Override public boolean equals(Object o)
-  {
-    if (o == null || getClass() != o.getClass())
-      return false;
-    Vinyl vinyl = (Vinyl) o;
-    return releaseYear == vinyl.releaseYear && id == vinyl.id
-        && isReserved == vinyl.isReserved && isBorrowed == vinyl.isBorrowed
-        && Objects.equals(title, vinyl.title) && Objects.equals(artist,
-        vinyl.artist) && Objects.equals(currentState, vinyl.currentState);
-  }
+  // generate equals and hashCode
+  
 
-  @Override public int hashCode()
-  {
-    return Objects.hash(title, artist, releaseYear, id, isReserved, isBorrowed,
-        currentState);
-  }
   // Mara and Ana
 
 }
