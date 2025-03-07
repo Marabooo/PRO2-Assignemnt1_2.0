@@ -12,12 +12,10 @@ public class Vinyl
   private int id;
   private boolean isReserved;
   private boolean isBorrowed;
-<<<<<<< Updated upstream
   private VinylState currentState;
-=======
   private boolean isMarkedForRemoval;
   private VinylState state;
->>>>>>> Stashed changes
+
 
 
   public Vinyl(String title, String artist, int releaseYear)
@@ -65,7 +63,8 @@ public class Vinyl
     return id;
   }
 
-  public boolean isReserved(){
+  public boolean isReserved()
+  {
     return isReserved;
   }
   public void setReserved(boolean reserved)
@@ -82,10 +81,10 @@ public class Vinyl
     isBorrowed = borrowed;
   }
 
-<<<<<<< Updated upstream
-  public VinylState getState(){
+  public VinylState getState()
+  {
     return currentState;
-=======
+  }
   public boolean isMarkedForRemoval()
   {
     return isMarkedForRemoval;
@@ -95,17 +94,10 @@ public class Vinyl
     isMarkedForRemoval = markedForRemoval;
   }
 
-  public VinylState getState()
-  {
-    return state;
-  }
-
   public void setState(VinylState state)
   {
     this.state = state;
->>>>>>> Stashed changes
   }
-  
 
   //
   // State methods
@@ -159,6 +151,6 @@ public class Vinyl
     return Objects.hash(title, artist, releaseYear, id, isReserved, isBorrowed,
         currentState);
   }
-  
+  // Mara and Ana
 
 }
