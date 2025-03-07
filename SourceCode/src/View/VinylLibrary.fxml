@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="State" prefHeight="442.0" prefWidth="619.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.VinylViewController">
+
+    <TableView fx:id="vinylTable" layoutX="129.0" layoutY="14.0" prefHeight="413.0" prefWidth="476.0">
+        <columns>
+            <TableColumn fx:id="titleColumn" prefWidth="147.60000610351562" text="Title" />
+            <TableColumn fx:id="artistColumn" prefWidth="122.0" text="Artist" />
+            <TableColumn fx:id="releaseYearColumn" prefWidth="91.5999755859375" text="Release Year" />
+            <TableColumn fx:id="stateColumn" prefWidth="116.20004272460938" text="State" />
+        </columns>
+    </TableView>
+
+    <HBox spacing="10" />
+    <Button fx:id="MarkfotRemovalButton" layoutX="14.0" layoutY="290.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="110.0" text="Mark for Removal" />
+    <Button fx:id="UnreserveButton" layoutX="14.0" layoutY="228.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="110.0" text="Unreserve" />
+    <Button fx:id="BorrowButton" layoutX="14.0" layoutY="44.0" onAction="#borrowVinyl" prefHeight="54.0" prefWidth="110.0" text="Borrow" />
+    <Button fx:id="ReserveButton" layoutX="14.0" layoutY="166.0" onAction="#reserveVinyl" prefHeight="54.0" prefWidth="110.0" text="Reserve" />
+    <Button fx:id="ReturnButton" layoutX="14.0" layoutY="105.0" onAction="#returnVinyl" prefHeight="54.0" prefWidth="110.0" text="Return" />
+    <Button fx:id="UnmarkforRemovalButton" ellipsisString=" " layoutX="14.0" layoutY="363.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="110.0" text="Unmark for Removal" textAlignment="CENTER" wrapText="true" />
+    <opaqueInsets>
+        <Insets top="10.0" />
+    </opaqueInsets>
+
+</AnchorPane>
