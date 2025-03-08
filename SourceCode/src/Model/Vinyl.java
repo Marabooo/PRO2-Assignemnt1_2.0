@@ -43,8 +43,42 @@ public class Vinyl implements Serializable
     this("Wouldn't you like to hear this?", "Greatest Artist Who Ever Lived", 2424);
   }
 
+    //
+   // - State Delegation Methods -
   //
-  // Setters and getters
+
+  public void borrow(Integer userId){
+    currentState.borrow(this, userId);
+  }
+  public void returnVinyl(){
+    currentState.returnVinyl(this);
+  }
+  public void reserve(Integer userId){
+    currentState.reserve(this, userId);
+  }
+  public void unreserve(){
+    currentState.unreserve(this);
+  }
+
+    //
+   // - Flagged for Removal Methods
+  //
+
+  public void markForRemoval(){
+    if(!isMarkedForRemoval){
+      isMarkedForRemoval = true;
+      firePropertyChange("markedForRemoval", false, true);
+    }
+  }
+  public void unmarkForRemoval(){
+    if (isMarkedForRemoval){
+      isMarkedForRemoval = false;
+      firePropertyChange("markedForRemoval", true, false);
+    }
+  }
+
+    //
+   // - Setters and getters -
   //
 
   public String getTitle() {
@@ -65,71 +99,34 @@ public class Vinyl implements Serializable
   public void setReleaseYear(int releaseYear) {
     this.releaseYear = releaseYear;
   }
-
   public Integer getReservedBy (){
     return reservedBy;
   }
-
   //public Integer getBorrowedBy { return borrowedBy };
   public int getId() {
     return id;
   }
-
-  //
-  // Setters (Used by States)
-  //
-
-  public void setReservedBy(Integer ID){
-    Integer old = this.borrowedBy;
-    this.borrowedBy = ID;
-    pcs.firePropertyChange("borrowerId", old, ID);
-  }
-
-
-
-  /*void setReservedBy(Integer userId) {
-    if (reservedBy != null || isMarkedForRemoval)
-    {
-      throw new IllegalArgumentException("Vinyl cannot be reserved.");
-    }
-    reservedBy = userId;
-  }
-  Integer getReservedBy ()
-  {
-    return reservedBy;
-  }
-  */
-
-
-  public void setBorrowedBy(Integer userId) {
-    if (borrowedBy != null || (reservedBy != null && reservedBy.equals(userId))|| (isMarkedForRemoval && reservedBy == null))
-    {
-      throw new IllegalArgumentException("Vinyl cannot be borrowed.");
-    }
-    borrowedBy = userId;
-  }
-
-  public VinylState getState()
-  {
+  public VinylState getState() {
     return currentState;
   }
-  public boolean isMarkedForRemoval()
-  {
-    return isMarkedForRemoval;
-  }
-  public void setMarkedForRemoval(boolean markedForRemoval)
-  {
-    isMarkedForRemoval = markedForRemoval;
-  }
-
-
 
     //
-   // State Delegation Methods
+   // - Setters (Used by States) -
   //
 
-  // ----- Mara: These 4 methods can be all merged into one Ana already made above this:
+  public void setReservedBy(Integer userId){
+    Integer old = this.reservedBy;
+    this.reservedBy = userId;
+    pcs.firePropertyChange("reservedBy", old, userId);
+  }
 
+  public void setBorrowedBy(Integer userId) {
+    Integer old = this.borrowedBy;
+    this.borrowedBy = userId;
+    pcs.firePropertyChange("borroedBy", old, userId);
+  }
+
+  // ----- Mara: These 4 methods can be all merged into one Ana already made:
   public void setState(VinylState newState){
     VinylState oldState = currentState;
     currentState = newState;
@@ -169,6 +166,9 @@ public class Vinyl implements Serializable
    */
 
 
+
+
+
     //  - Observer Pattern Methods -
    // allows us to implement the Observer Pattern and separate the application logic from the graphical interface.
   //
@@ -200,10 +200,10 @@ public class Vinyl implements Serializable
   // generate equals and hashCode
 
 
+    //
+   // Testing/Utility Methods
+  //
 
-  //
-  // Testing relevant methods
-  //
   public static void resetCounter() {
     nextId = 1;
   }
