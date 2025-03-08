@@ -12,9 +12,83 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import java.util.*;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import States.VinylState;
+
+
 public class VinylViewModel {
   private final ObservableList<Vinyl> vinyls = FXCollections.observableArrayList();
-  private final Random random = new Random();
+  private final VinylLibrary vinylLibrary;
+  private final StringProperty selectedVinylTitle = new SimpleStringProperty();
+
+  public VinylViewModel(VinylLibrary library) {
+    this.vinylLibrary = library;
+    this.vinyls.addAll(library.getVinyls()); // add all vinyls from the library
+  }
+
+  //Expose Vinyl List to the View / binding
+  public ObservableList<Vinyl> getVinyls() {
+    return vinyls;
+  }
+
+  //Allows the binding of the selected Vinyl’s title to a label or text field in the GUI
+  public StringProperty selectedVinylTitleProperty() {
+    return selectedVinylTitle;
+  }
+
+  public void updateVinyls() {
+    vinyls.setAll(vinylLibrary.getVinyls()); // Updating the UI When the Model Changes
+  }
+
+public void unreserveVinyl(Vinyl vinyl) {
+    if (vinyl != null) {
+      vinyl.onUnreserveButtonPress();
+      updateVinyls();
+    }
+  }
+   public void unmarkForRemoval(Vinyl vinyl) {
+    if (vinyl != null) {
+      vinyl.onUnmarkForRemovalButtonPress();
+      updateVinyls();
+    }
+  }
+
+
+  public void borrowVinyl(Vinyl vinyl) {
+    if (vinyl != null) {
+      vinyl.onBorrowButtonPress();
+      updateVinyls();
+    }
+  }
+
+  public void reserveVinyl(Vinyl vinyl) {
+    if (vinyl != null) {
+      vinyl.onReserveButtonPress();
+      updateVinyls();
+    }
+  }
+  public void returnVinyl(Vinyl vinyl) {
+    if (vinyl != null) {
+      vinyl.onReturnButtonPress();
+      updateVinyls();
+    }
+  }
+
+  //If a Vinyl is not borrowed or reserved, it is removed from the library.
+  //If it is still in use, it is flagged for removal.
+  public void removeVinyl(Vinyl vinyl) {
+    if (vinyl != null && vinyl.isMarkedForRemoval()) {
+      vinylLibrary.removeVinyl(vinyl);
+      updateVinyls();
+    } else {
+      vinyl.onMarkForRemovalButtonPress();
+      updateVinyls();
+    }
+  }
+
+
+  /*private final Random random = new Random();
 
   private User currentUser;
 
@@ -102,5 +176,7 @@ public class VinylViewModel {
     // Logic to add a vinyl
     return true; // return true if successful
   }
+*/
 
 }
+
