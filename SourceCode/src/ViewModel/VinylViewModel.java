@@ -4,6 +4,10 @@ package ViewModel;
 
 
 import Model.*;
+import States.AvailableAndReservedState;
+import States.AvailableState;
+import States.BorrowedAndReservedState;
+import States.BorrowedState;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import java.util.*;
@@ -114,16 +118,16 @@ public void unreserveVinyl(Vinyl vinyl) {
         .ifPresent(v -> {
           switch (state) {
             case "Borrowed":
-              v.changeToBorrowedState();
+              v.setState(new BorrowedState());
               break;
             case "Available":
-              v.changeToAvailableState();
+              v.setState(new AvailableState());
               break;
             case "BorrowedAndReserved":
-              v.changeToBorrowedAndReservedState();
+              v.setState(new BorrowedAndReservedState());
               break;
             case "AvailableAndReserved":
-              v.changeToAvailableAndReservedState();
+              v.setState(new AvailableAndReservedState());
               break;
             default:
               throw new IllegalArgumentException("Unknown state: " + state);

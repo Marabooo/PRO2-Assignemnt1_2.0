@@ -13,17 +13,17 @@ public class Vinyl implements Serializable
   private String title;
   private String artist;
   private int releaseYear;
+  private VinylState currentState;
+
   private static int nextId = 1;
   private int id;
+
   private Integer reservedBy;
   private Integer borrowedBy;
-  private VinylState currentState;
   private boolean isMarkedForRemoval;
-  //private VinylState state; //can lead to confusions
+
   private transient PropertyChangeSupport pcs = new PropertyChangeSupport(this);
-  //made transient so it won't be serialized
-
-
+  // Made transient so it won't be serialized
 
   public Vinyl(String title, String artist, int releaseYear)
   {
@@ -36,65 +36,72 @@ public class Vinyl implements Serializable
     this.isMarkedForRemoval = false;
     this.id = nextId++;
   }
-  public Vinyl()
 
-  {
+  public Vinyl() {
     // Required for XML decoding;
     // gave it default values, but they won't matter
-   this("Wouldn't you like to hear this?", "Greatest Artist Who Ever Lived", 2424);
+    this("Wouldn't you like to hear this?", "Greatest Artist Who Ever Lived", 2424);
   }
+
   //
-  //setters and getters
+  // Setters and getters
   //
 
-  public String getTitle()
-  {
+  public String getTitle() {
     return title;
   }
-  public void setTitle(String title)
-  {
+  public void setTitle(String title) {
     this.title = title;
   }
-  public String getArtist()
-  {
+  public String getArtist() {
     return artist;
   }
-  public void setArtist(String artist)
-  {
+  public void setArtist(String artist) {
     this.artist = artist;
   }
-  public int getReleaseYear()
-  {
+  public int getReleaseYear() {
     return releaseYear;
   }
-  public void setReleaseYear(int releaseYear)
-  {
+  public void setReleaseYear(int releaseYear) {
     this.releaseYear = releaseYear;
   }
-  public int getId()
-  {
+
+  public Integer getReservedBy (){
+    return reservedBy;
+  }
+
+  //public Integer getBorrowedBy { return borrowedBy };
+  public int getId() {
     return id;
   }
 
+  //
+  // Setters (Used by States)
+  //
+
+  public void setReservedBy(Integer ID){
+    Integer old = this.borrowedBy;
+    this.borrowedBy = ID;
+    pcs.firePropertyChange("borrowerId", old, ID);
+  }
 
 
-  public void setReservedBy(Integer userId)
-  {
+
+  /*void setReservedBy(Integer userId) {
     if (reservedBy != null || isMarkedForRemoval)
     {
       throw new IllegalArgumentException("Vinyl cannot be reserved.");
     }
     reservedBy = userId;
   }
-  public Integer getReservedBy ()
+  Integer getReservedBy ()
   {
     return reservedBy;
   }
-  
+  */
 
 
-  public void setBorrowedBy(Integer userId)
-  {
+  public void setBorrowedBy(Integer userId) {
     if (borrowedBy != null || (reservedBy != null && reservedBy.equals(userId))|| (isMarkedForRemoval && reservedBy == null))
     {
       throw new IllegalArgumentException("Vinyl cannot be borrowed.");
@@ -115,17 +122,22 @@ public class Vinyl implements Serializable
     isMarkedForRemoval = markedForRemoval;
   }
 
-  public void setState(VinylState state)
-  {
+
+
+    //
+   // State Delegation Methods
+  //
+
+  // ----- Mara: These 4 methods can be all merged into one Ana already made above this:
+
+  public void setState(VinylState newState){
     VinylState oldState = currentState;
-    this.currentState = state;
-    firePropertyChange("state", oldState, currentState);
+    currentState = newState;
+    firePropertyChange("state", oldState, newState);
   }
 
-  //
-  // State methods
-  //
-
+  // The 4 methods merged:
+  /*
   public void changeToAvailableState()
   {
     VinylState oldState = currentState;
@@ -154,54 +166,30 @@ public class Vinyl implements Serializable
     firePropertyChange("state", oldState, currentState);
   }
 
- //
- // Button methods
- //
-  public void onBorrowButtonPress(){
-    currentState.onBorrowButtonPress(this);
-  }
-  public void onReturnButtonPress(){
-    currentState.onReturnButtonPress(this);
-  }
-  public void onReserveButtonPress(){
-    currentState.onReserveButtonPress(this);
-  }
-  public void onUnreserveButtonPress(){
-    currentState.onUnreserveButtonPress(this);
-  }
-  /*public void onMarkForRemovalButtonPress(){
-    currentState.onMarkForRemovalButtonPress(this);
-  }
-  public void onUnmarkForRemovalButtonPress(){
-    currentState.onUnmarkForRemovalButtonPress(this);
-  }
-*/
+   */
 
-//
-//Listener methods
-//
 
-  public void addPropertyChangeListener(PropertyChangeListener listener)
-  {
+    //  - Observer Pattern Methods -
+   // allows us to implement the Observer Pattern and separate the application logic from the graphical interface.
+  //
+
+  public void addPropertyChangeListener(PropertyChangeListener listener) {
     pcs.addPropertyChangeListener(listener);
   }
 
-  public void removePropertyChangeListener(PropertyChangeListener listener)
-  {
+  public void removePropertyChangeListener(PropertyChangeListener listener) {
     pcs.removePropertyChangeListener(listener);
   }
 
   // Notify listeners about the change
-  public void firePropertyChange(String propertyName, Object oldValue,
-      Object newValue)
-  {
+  public void firePropertyChange(String propertyName, Object oldValue, Object newValue) {
     pcs.firePropertyChange(propertyName, oldValue, newValue);
-  } //allows us to implement the Observer Pattern and separate the application logic from the graphical interface.
+  }
 
 
+    //
+   // toString, equals and hashCode
   //
-// toString, equals and hashCode
-//
 
   @Override public String toString()
   {
@@ -214,10 +202,9 @@ public class Vinyl implements Serializable
 
 
   //
-  //testing relevant methods
+  // Testing relevant methods
   //
-  public static void resetCounter()
-  {
+  public static void resetCounter() {
     nextId = 1;
   }
   // Mara and Ana

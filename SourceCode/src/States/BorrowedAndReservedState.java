@@ -12,8 +12,8 @@ public class BorrowedAndReservedState implements VinylState {
     @Override
     public void returnVinyl(Vinyl vinyl) {
       vinyl.setBorrowedBy(null);
-      //vinyl.setState(new AvailableAndReservedState());
-      vinyl.changeToAvailableAndReservedState();
+      vinyl.setState(new AvailableAndReservedState());
+      //vinyl.changeToAvailableAndReservedState();
     }
 
     @Override
@@ -23,8 +23,8 @@ public class BorrowedAndReservedState implements VinylState {
 
     public void unreserve(Vinyl vinyl) {
       vinyl.setReservedBy(null);
-      //vinyl.setStatus(new BorrowedState());
-      vinyl.changeToBorrowedState();
+      vinyl.setState(new BorrowedState());
+      //vinyl.changeToBorrowedState();
     }
 
     /*

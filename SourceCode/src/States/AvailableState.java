@@ -14,8 +14,8 @@ public class AvailableState implements VinylState {
     // - Flagged but user is the reserver
     if (!vinyl.isMarkedForRemoval() || userId == vinyl.getReservedBy()){
       vinyl.setBorrowedBy(userId);
-      //vinyl.setState(new BorrowedState());
-      vinyl.changeToBorrowedState();
+      vinyl.setState(new BorrowedState());
+      //vinyl.changeToBorrowedState();
     }
 
   }
@@ -28,8 +28,8 @@ public class AvailableState implements VinylState {
   public void reserve(Vinyl vinyl, int userId) {
     if (!vinyl.isMarkedForRemoval()){
       vinyl.setReservedBy(userId);
-      //vinyl.setState(new AvailableAndReservedState());
-      vinyl.changeToAvailableAndReservedState();
+      vinyl.setState(new AvailableAndReservedState());
+      //vinyl.changeToAvailableAndReservedState();
     }
   }
 

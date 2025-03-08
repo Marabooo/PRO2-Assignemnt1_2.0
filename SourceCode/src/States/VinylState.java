@@ -8,7 +8,4 @@ public interface VinylState {
   void reserve(Vinyl vinyl, int userId);
   void unreserve(Vinyl vinyl);
 
-  //void onMarkForRemovalButtonPress(Vinyl var1);
-
-  //void onUnmarkForRemovalButtonPress(Vinyl var1);
 }
