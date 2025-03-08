@@ -136,21 +136,21 @@ public class Vinyl implements Serializable
   public void changeToBorrowedState()
   {
     VinylState oldState = currentState;
-    currentState = new BorrowedState(this);
+    currentState = new BorrowedState();
     firePropertyChange("state", oldState, currentState);
   }
 
   public void changeToBorrowedAndReservedState()
   {
     VinylState oldState = currentState;
-    currentState = new BorrowedAndReservedState(this);
+    currentState = new BorrowedAndReservedState();
     firePropertyChange("state", oldState, currentState);
   }
 
   public void changeToAvailableAndReservedState()
   {
     VinylState oldState = currentState;
-    currentState = new AvailableAndReservedState(this);
+    currentState = new AvailableAndReservedState();
     firePropertyChange("state", oldState, currentState);
   }
 
