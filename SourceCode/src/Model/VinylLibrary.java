@@ -61,4 +61,5 @@ public class VinylLibrary implements Serializable
     return s.toString();
   }
 
+  //TO DO make sure we have getters for the lists (XMLStorage needs them)
 }

@@ -16,6 +16,11 @@ public class User implements Serializable
     this.name = name;
     this.id = nextId++;
   }
+  public User() {
+    // Required for XML decoding;
+    // gave it a default name, but it won't matter
+    this.name = "Lola Bunny";
+  }
 
   public String getName (){
     return name;
