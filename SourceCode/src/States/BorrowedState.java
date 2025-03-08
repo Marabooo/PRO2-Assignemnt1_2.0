@@ -21,12 +21,12 @@ public class BorrowedState implements VinylState
   public void reserve(Vinyl vinyl, int userId)
   {
     // Can only reserve vinyls that are not flagged for removal
-    if (!vinyl.isMarkedForRemoval())
+    if (vinyl.isMarkedForRemoval())
     {
-      vinyl.setReservedBy(userId);
-      vinyl.setState(new BorrowedAndReservedState());
+      throw new IllegalArgumentException("Vinyl is marked for removal");
     }
-
+    vinyl.setReservedBy(userId);
+    vinyl.setState(new BorrowedAndReservedState());
   }
 
   public void unreserve(Vinyl vinyl)
@@ -40,4 +40,9 @@ public class BorrowedState implements VinylState
     return"Borrowed";
   }
    */
+
+  @Override public String toString()
+  {
+    return "Borrowed";
+  }
 }

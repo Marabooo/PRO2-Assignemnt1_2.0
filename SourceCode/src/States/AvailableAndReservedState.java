@@ -35,4 +35,8 @@ public class AvailableAndReservedState implements VinylState {
   }
   */
 
+  @Override
+  public String toString(){
+    return "Available and Reserved";
+  }
 }

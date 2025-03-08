@@ -39,8 +39,7 @@ public class Vinyl implements Serializable
 
   public Vinyl() {
     // Required for XML decoding;
-    // gave it default values, but they won't matter
-    this("Wouldn't you like to hear this?", "Greatest Artist Who Ever Lived", 2424);
+    // empty because beans require a no-arg constructor
   }
 
     //
@@ -107,6 +106,9 @@ public class Vinyl implements Serializable
   public int getId() {
     return id;
   }
+  public void setId(int id) {
+    this.id = id;
+  }// needed for XML serialization
   public VinylState getState() {
     return currentState;
   }
@@ -198,14 +200,30 @@ public class Vinyl implements Serializable
 
   @Override public String toString()
   {
-    return "Vinyl{" + "title='" + title + '\'' + ", artist='" + artist + '\''
-        + ", releaseYear=" + releaseYear + ", id=" + id + ", state=" + currentState + '}';
+    return "Viny: " + "title: '" + this.getTitle() + ", artist: " + this.getArtist() + '.'
+        + ", releaseYear=" + this.getReleaseYear() + ", id=" + this.getId() + ", state=" + currentState + '}';
   }
 
-  // generate equals and hashCode
+  @Override public boolean equals(Object o)
+  {
+    if (o == null || getClass() != o.getClass())
+      return false;
+    Vinyl vinyl = (Vinyl) o;
+    return releaseYear == vinyl.releaseYear && id == vinyl.id
+        && isMarkedForRemoval == vinyl.isMarkedForRemoval && Objects.equals(
+        title, vinyl.title) && Objects.equals(artist, vinyl.artist)
+        && Objects.equals(currentState, vinyl.currentState) && Objects.equals(
+        reservedBy, vinyl.reservedBy) && Objects.equals(borrowedBy,
+        vinyl.borrowedBy) && Objects.equals(pcs, vinyl.pcs);
+  }
 
+  @Override public int hashCode()
+  {
+    return Objects.hash(title, artist, releaseYear, currentState, id,
+        reservedBy, borrowedBy, isMarkedForRemoval, pcs);
+  }
 
-    //
+  //
    // Testing/Utility Methods
   //
 

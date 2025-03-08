@@ -3,8 +3,10 @@ package Storage;
 import Model.*;
 import java.beans.XMLEncoder;
 import java.beans.XMLDecoder;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileInputStream;
+import java.util.ArrayList;
 import java.util.List;
 
 public class XMLStorage {
@@ -23,7 +25,12 @@ public class XMLStorage {
 
   // Load a list of Vinyl objects from an XML file.
   public static List<Vinyl> loadVinylsFromXML(String filename) {
-    try (XMLDecoder decoder = new XMLDecoder(new FileInputStream(filename))) {
+    File file = new File(filename);
+    if (!file.exists()) {
+      System.out.println("File " + filename + " does not exist. Starting with an empty list.");
+      return new ArrayList<>();
+    }
+    try (XMLDecoder decoder = new XMLDecoder(new FileInputStream(file))) {
       @SuppressWarnings("unchecked")
       List<Vinyl> vinyls = (List<Vinyl>) decoder.readObject();
       System.out.println("Vinyls loaded successfully from " + filename);
@@ -31,7 +38,7 @@ public class XMLStorage {
     } catch (Exception e) {
       System.err.println("Error loading vinyls: " + e.getMessage());
       e.printStackTrace();
-      return null;
+      return new ArrayList<>();
     }
   }
 
@@ -49,7 +56,12 @@ public class XMLStorage {
 
   // Load a list of User objects from an XML file.
   public static List<User> loadUsersFromXML(String filename) {
-    try (XMLDecoder decoder = new XMLDecoder(new FileInputStream(filename))) {
+    File file = new File(filename);
+    if (!file.exists()) {
+      System.out.println("File " + filename + " does not exist. Starting with an empty list.");
+      return new ArrayList<>();
+    }
+    try (XMLDecoder decoder = new XMLDecoder(new FileInputStream(file))) {
       @SuppressWarnings("unchecked")
       List<User> users = (List<User>) decoder.readObject();
       System.out.println("Users loaded successfully from " + filename);
@@ -57,7 +69,7 @@ public class XMLStorage {
     } catch (Exception e) {
       System.err.println("Error loading users: " + e.getMessage());
       e.printStackTrace();
-      return null;
+      return new ArrayList<>();
     }
   }
 }

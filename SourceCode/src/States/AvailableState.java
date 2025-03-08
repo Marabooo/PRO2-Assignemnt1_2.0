@@ -46,5 +46,9 @@ public class AvailableState implements VinylState {
 
 
    */
+  @Override
+  public String toString() {
+    return "Available";
+  }
 
 }

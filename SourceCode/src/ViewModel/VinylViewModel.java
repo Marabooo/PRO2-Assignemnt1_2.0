@@ -4,10 +4,8 @@ package ViewModel;
 
 
 import Model.*;
-import States.AvailableAndReservedState;
-import States.AvailableState;
-import States.BorrowedAndReservedState;
-import States.BorrowedState;
+import States.*;
+import Storage.XMLStorage;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import java.util.*;
@@ -97,6 +95,12 @@ public void unreserveVinyl(Vinyl vinyl) {
       vinyl.markForRemoval();
       updateVinyls();
     }
+  }
+
+  // Save the data to XML
+  public void saveData() {
+    XMLStorage.saveVinylsToXML("vinyls.xml", vinylLibrary.getVinyls());
+    XMLStorage.saveUsersToXML("users.xml", vinylLibrary.getUsers());
   }
 
 

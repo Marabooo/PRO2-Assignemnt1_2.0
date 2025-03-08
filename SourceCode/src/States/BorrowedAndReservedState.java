@@ -34,7 +34,9 @@ public class BorrowedAndReservedState implements VinylState {
     public String getStatus(){
     return "Borrowed and Reserved";
      */
-
+  @Override
+  public String toString() {
+    return "Borrowed and Reserved";}
 
   }
 
