@@ -9,7 +9,8 @@ import javafx.stage.Stage;
 public class Main extends Application {
   @Override
   public void start(Stage primaryStage) throws Exception {
-    Parent root = FXMLLoader.load(getClass().getResource("/View/VinylLibrary.fxml"));
+    FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/VinylView.fxml"));
+    Parent root = loader.load();
     primaryStage.setTitle("Vinyl Library");
     primaryStage.setScene(new Scene(root));
     primaryStage.show();

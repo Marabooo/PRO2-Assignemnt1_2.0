@@ -4,7 +4,6 @@ package ViewModel;
 
 
 import Model.*;
-import States.VinylState;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import java.util.*;
@@ -30,7 +29,9 @@ public class ViewModel {
 
   public void borrowVinyl(int id) { updateState(id, "Borrowed"); }
   public void returnVinyl(int id) { updateState(id, "Available"); }
-
+  public void unreserveVinyl(int id) { updateState(id, "Unreserved"); }
+  public void markForRemoval(int id) { updateState(id, "Marked for removal"); }
+  public void unmarkForRemoval(int id) { updateState(id, "Unmarked for removal"); }
 
   private void updateState(int id, String state) {
     vinyls.stream()
@@ -87,5 +88,6 @@ public class ViewModel {
     int currentUserId = currentUser.getId();
     reserveVinyl(vinylId, currentUserId);
   }
+
 
 }
