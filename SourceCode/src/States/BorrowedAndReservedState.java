@@ -10,10 +10,12 @@ public class BorrowedAndReservedState implements VinylState {
     }
 
     @Override
-    public void returnVinyl(Vinyl vinyl) {
+    public void returnVinyl(Vinyl vinyl, int userId) {
+      if (vinyl.getBorrowedBy() != userId) {
+        throw new IllegalArgumentException("Vinyl is not borrowed by this user");
+      }
       vinyl.setBorrowedBy(null);
       vinyl.setState(new AvailableAndReservedState());
-      //vinyl.changeToAvailableAndReservedState();
     }
 
     @Override

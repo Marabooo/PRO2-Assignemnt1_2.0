@@ -51,29 +51,29 @@ public class VinylViewController {
     viewModel.borrowVinyl(vinyl, user);
   }
 
-  public void onReserveButtonPressed(Vinyl userId) {
-    viewModel.reserveVinyl(userId);
+  public void onReserveButtonPressed(Vinyl vinyl) {
+    viewModel.reserveVinyl(vinyl, User.adminUser);
   }
 
-  public void onReturnButtonPressed(Vinyl userId) {
-    viewModel.returnVinyl(userId);
+  public void onReturnButtonPressed(Vinyl vinyl) {
+    viewModel.returnVinyl(vinyl);
   }
 
-  public void onUnreserveButtonPressed(Vinyl userId) {
-    viewModel.unreserveVinyl(userId);
+  public void onUnreserveButtonPressed(Vinyl vinyl) {
+    viewModel.unreserveVinyl(vinyl);
   }
 
-  public void onMarkForRemovalButtonPressed(Vinyl userId) {
-    viewModel.markForRemoval(userId);
+  public void onMarkForRemovalButtonPressed(Vinyl vinyl) {
+    viewModel.markForRemoval(vinyl);
   }
 
   @FXML
   public void borrowVinyl() {
     Vinyl selected = vinylTable.getSelectionModel().getSelectedItem();
-    User adminUser = new User("admin", 0);
+
     if (selected != null) {
       new Thread(() -> {
-        viewModel.borrowVinyl(selected, selectedUser);
+        viewModel.borrowVinyl(selected, User.adminUser);
         updateUI();
       }).start();
     }
@@ -84,7 +84,7 @@ public class VinylViewController {
     Vinyl selected = vinylTable.getSelectionModel().getSelectedItem();
     if (selected != null) {
       new Thread(() -> {
-        viewModel.reserveVinyl(selected.getId(), 1);
+        viewModel.reserveVinyl(selected, User.adminUser);
         updateUI();
       }).start();
     }
@@ -95,7 +95,7 @@ public class VinylViewController {
     Vinyl selected = vinylTable.getSelectionModel().getSelectedItem();
     if (selected != null) {
       new Thread(() -> {
-        viewModel.returnVinyl(selected.getId());
+        viewModel.returnVinyl(selected);
         updateUI();
       }).start();
     }
@@ -117,7 +117,7 @@ public class VinylViewController {
     Vinyl selected = vinylTable.getSelectionModel().getSelectedItem();
     if (selected != null) {
       new Thread(() -> {
-        viewModel.markForRemoval(selected.getId());
+        viewModel.markForRemoval(selected);
         updateUI();
       }).start();
     }

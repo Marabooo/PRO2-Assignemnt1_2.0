@@ -11,7 +11,7 @@ public class User implements Serializable
   private static int nextId = 1;
   private int id;
 
-  public User adminUser = new User("admin",0);//creating an admin user for testing purposes
+  public static final User adminUser = new User("admin",0);//creating an admin user for testing purposes
 
   public User(String name)
   {

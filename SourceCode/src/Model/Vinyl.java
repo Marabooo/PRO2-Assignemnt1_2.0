@@ -51,7 +51,8 @@ public class Vinyl implements Serializable
     currentState.borrow(this, userId);
   }
   public void returnVinyl(){
-    currentState.returnVinyl(this);
+
+    currentState.returnVinyl(this, borrowedBy);
   }
   public void reserve(Integer userId){
     currentState.reserve(this, userId);
@@ -102,7 +103,7 @@ public class Vinyl implements Serializable
   public Integer getReservedBy (){
     return reservedBy;
   }
-  //public Integer getBorrowedBy { return borrowedBy };
+  public Integer getBorrowedBy() { return borrowedBy; };
   public int getId() {
     return id;
   }

@@ -20,7 +20,7 @@ public class AvailableState implements VinylState {
 
   }
 
-  public void returnVinyl(Vinyl vinyl) {
+  public void returnVinyl(Vinyl vinyl, int userId) {
     // Do nothing (Available vinyls can't be returned)
   }
 

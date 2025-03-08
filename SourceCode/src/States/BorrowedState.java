@@ -8,11 +8,14 @@ public class BorrowedState implements VinylState
     // Do nothing (already borrowed by someone)
   }
 
-  public void returnVinyl(Vinyl vinyl)
+  public void returnVinyl(Vinyl vinyl, int userId)
   {
+    if (vinyl.getBorrowedBy() != userId)
+    {
+      throw new IllegalArgumentException("Vinyl is not borrowed by this user");
+    }
     vinyl.setBorrowedBy(null);
-    vinyl.setState(new BorrowedAndReservedState());
-    //vinyl.changeToAvailableState();
+    vinyl.setState(new AvailableState());
   }
 
   public void reserve(Vinyl vinyl, int userId)
@@ -22,7 +25,6 @@ public class BorrowedState implements VinylState
     {
       vinyl.setReservedBy(userId);
       vinyl.setState(new BorrowedAndReservedState());
-      //vinyl.changeToBorrowedAndReservedState();
     }
 
   }

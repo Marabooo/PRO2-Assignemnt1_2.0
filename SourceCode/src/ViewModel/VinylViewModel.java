@@ -46,7 +46,7 @@ public class VinylViewModel {
     vinylLibrary.addVinyl(newVinyl);
     updateVinyls();
   }
-  public void addUsers(String username) {
+  public void addUser(String username) {
     User newUser = new User(username);
     vinylLibrary.addUser(newUser);
     updateVinyls();
@@ -79,31 +79,26 @@ public void unreserveVinyl(Vinyl vinyl) {
       updateVinyls();
     }
   }
-//
-//  public void reserveVinyl(Vinyl vinyl) {
-//    if (vinyl != null) {
-//      vinyl.onReserveButtonPress();
-//      updateVinyls();
-//    }
-//  }
-//  public void returnVinyl(Vinyl vinyl) {
-//    if (vinyl != null) {
-//      vinyl.onReturnButtonPress();
-//      updateVinyls();
-//    }
-//  }
 
-  //If a Vinyl is not borrowed or reserved, it is removed from the library.
-  //If it is still in use, it is flagged for removal.
-//  public void removeVinyl(Vinyl vinyl) {
-//    if (vinyl != null && vinyl.isMarkedForRemoval()) {
-//      vinylLibrary.removeVinyl(vinyl);
-//      updateVinyls();
-//    } else {
-//      vinyl.onMarkForRemovalButtonPress();
-//      updateVinyls();
-//    }
-//  }
+  public void reserveVinyl(Vinyl vinyl, User user) {
+    if (vinyl != null) {
+      vinyl.reserve(user.getId());
+      updateVinyls();
+    }
+  }
+  public void returnVinyl(Vinyl vinyl) {
+    if (vinyl != null) {
+      vinyl.returnVinyl();
+      updateVinyls();
+    }
+  }
+  public void markForRemoval(Vinyl vinyl) {
+    if (vinyl != null) {
+      vinyl.markForRemoval();
+      updateVinyls();
+    }
+  }
+
 
 
   /*private final Random random = new Random();

@@ -26,16 +26,20 @@ public class AddUserController {
       return;
     }
 
-    new Thread(() -> {
-      boolean success = viewModel.addUser(user);
-      Platform.runLater(() -> {
-        if (success) {
-          statusLabel.setText("User added successfully!");
-          usernameField.clear();
-        } else {
-          statusLabel.setText("Failed to add user.");
-        }
-      });
-    }).start();
+    try
+    {
+      String usernameFieldText = usernameField.getText();
+
+      new Thread(() -> {
+        viewModel.addUser(usernameFieldText);
+        Platform.runLater(() -> {
+            statusLabel.setText("User added successfully!");
+            usernameField.clear();
+            statusLabel.setText("Failed to add user.");
+        });
+      }).start();
+    } catch (IllegalArgumentException e) {
+      statusLabel.setText("Failed to add user.");
+    }
   }
 }
