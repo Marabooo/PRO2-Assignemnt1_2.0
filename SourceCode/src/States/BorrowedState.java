@@ -1,34 +1,41 @@
 package States;
 import Model.*;
 
-public class BorrowedState implements VinylState {
-  
-  public BorrowedState(Vinyl vinyl) {
-    System.out.println(" ");
-    System.out.println(" Vinyl is Borrowed ");
+public class BorrowedState implements VinylState
+{
+  public void borrow(Vinyl vinyl, int userId)
+  {
+    // Do nothing (already borrowed by someone)
   }
 
-  public void onBorrowButtonPress(Vinyl vinyl) {
-  }
-
-  public void onReturnButtonPress(Vinyl vinyl) {
-    System.out.println(" Returning vinyl ...");
+  public void returnVinyl(Vinyl vinyl)
+  {
+    vinyl.setBorrowedBy(null);
+    //vinyl.setState(new BorrowedAndReservedState());
     vinyl.changeToAvailableState();
   }
 
-  public void onReserveButtonPress(Vinyl vinyl) {
-    System.out.println(" Reserving vinyl ... ");
-    vinyl.changeToBorrowedAndReservedState();
+  public void reserve(Vinyl vinyl, int userId)
+  {
+    // Can only reserve vinyls that are not flagged for removal
+    if (!vinyl.isMarkedForRemoval())
+    {
+      vinyl.setReservedBy(userId);
+      //vinyl.setState(new BorrowedAndReservedState());
+      vinyl.changeToBorrowedAndReservedState();
+    }
+
   }
 
-  public void onUnreserveButtonPress(Vinyl vinyl) {
+  public void unreserve(Vinyl vinyl)
+  {
+    // Do nothing (just borrowed, there is no reservation)
   }
 
-  public void onMarkForRemovalButtonPress(Vinyl vinyl) {
-    System.out.println("Changing flag to -> For REMOVAL ");
+  /*
+  @Override public String getStatus()
+  {
+    return"Borrowed";
   }
-
-  public void onUnmarkForRemovalButtonPress(Vinyl vinyl) {
-    System.out.println(" Removing removal flag ");
-  }
+   */
 }

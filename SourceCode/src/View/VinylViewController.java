@@ -2,7 +2,7 @@ package View;
 
 import Model.Vinyl;
 import Model.User;
-import ViewModel.ViewModel;
+import ViewModel.VinylViewModel;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -27,8 +27,8 @@ public class VinylViewController {
   @FXML private TableColumn<Vinyl, Integer> releaseYearColumn;
   @FXML private TableColumn<Vinyl, Integer> stateColumn;
 
-  private ViewModel viewModel;
-  public void initViewModel(ViewModel viewModel) {
+  private VinylViewModel viewModel;
+  public void initViewModel(VinylViewModel viewModel) {
     this.viewModel = viewModel;
     vinylTable.setItems(viewModel.getVinyls());
 

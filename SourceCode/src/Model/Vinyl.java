@@ -3,10 +3,13 @@ import States.*;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Vinyl
+public class Vinyl implements Serializable
 {
+  @Serial private static final long serialVersionUID = 1L;
   private String title;
   private String artist;
   private int releaseYear;
@@ -17,11 +20,12 @@ public class Vinyl
   private VinylState currentState;
   private boolean isMarkedForRemoval;
   //private VinylState state; //can lead to confusions
-  private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+  private transient PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+  //made transient so it won't be serialized
 
 
 
-  public Vinyl(int i, String title, String artist, int releaseYear)
+  public Vinyl(String title, String artist, int releaseYear)
   {
     this.title = title;
     this.artist = artist;
@@ -32,7 +36,13 @@ public class Vinyl
     this.isMarkedForRemoval = false;
     this.id = nextId++;
   }
+  public Vinyl()
 
+  {
+    // Required for XML decoding;
+    // gave it default values, but they won't matter
+   this("Wouldn't you like to hear this?", "Greatest Artist Who Ever Lived", 2424);
+  }
   //
   //setters and getters
   //
@@ -126,21 +136,21 @@ public class Vinyl
   public void changeToBorrowedState()
   {
     VinylState oldState = currentState;
-    currentState = new BorrowedState(this);
+    currentState = new BorrowedState();
     firePropertyChange("state", oldState, currentState);
   }
 
   public void changeToBorrowedAndReservedState()
   {
     VinylState oldState = currentState;
-    currentState = new BorrowedAndReservedState(this);
+    currentState = new BorrowedAndReservedState();
     firePropertyChange("state", oldState, currentState);
   }
 
   public void changeToAvailableAndReservedState()
   {
     VinylState oldState = currentState;
-    currentState = new AvailableAndReservedState(this);
+    currentState = new AvailableAndReservedState();
     firePropertyChange("state", oldState, currentState);
   }
 
@@ -200,8 +210,16 @@ public class Vinyl
   }
 
   // generate equals and hashCode
-  
 
+
+
+  //
+  //testing relevant methods
+  //
+  public static void resetCounter()
+  {
+    nextId = 1;
+  }
   // Mara and Ana
 
 }

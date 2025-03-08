@@ -1,11 +1,23 @@
-package Model;
+
+
+
+// Moved to VinylLibrary class
+
+
+
+
+
+/*package Model;
 import States.*;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VinylList
+public class VinylList implements Serializable
 {
+  @Serial private static final long serialVersionUID = 1L;
   private List<Vinyl> vinyls;
 
   public VinylList()
@@ -29,6 +41,7 @@ public class VinylList
     }
     this.vinyls.remove(vinyl);
   }
+
   public List<Vinyl> getVinylList()
   {
     return this.vinyls;
@@ -47,3 +60,5 @@ public class VinylList
   }
 
 }
+  */
+  

@@ -2,17 +2,38 @@ package States;
 import Model.*;
 
 public class AvailableAndReservedState implements VinylState {
-  public AvailableAndReservedState(Vinyl vinyl) { /* compiled code */ }
 
-  public void onBorrowButtonPress(Vinyl vinyl) { /* compiled code */ }
+  @Override
+  public void borrow (Vinyl vinyl, int userId){
+    // Only the reserver can borrow
+    if (userId == vinyl.getReservedBy()){
+      vinyl.setBorrowedBy(userId);
+      //vinyl.setState(new BorrowedState());
+      vinyl.changeToBorrowedState();
+    }
+  }
 
-  public void onReturnButtonPress(Vinyl vinyl) { /* compiled code */ }
+  @Override
+  public void returnVinyl (Vinyl vinyl){
+    // Do nothing (Available vinyls can't be returned)
+  }
 
-  public void onReserveButtonPress(Vinyl vinyl) { /* compiled code */ }
+  @Override
+  public void reserve (Vinyl vinyl, int userId){
+    // Do nothing (already reserved)
+  }
 
-  public void onUnreserveButtonPress(Vinyl vinyl) { /* compiled code */ }
+  @Override
+  public void unreserve (Vinyl vinyl){
+    vinyl.setReservedBy(null);
+    //vinyl.setState(new AvailableState());
+  }
 
-  public void onMarkForRemovalButtonPress(Vinyl vinyl) { /* compiled code */ }
+  /*
+  @Override
+  public String getStatus() {
+    return "Available and Reserved";
+  }
+  */
 
-  public void onUnmarkForRemovalButtonPress(Vinyl vinyl) { /* compiled code */ }
 }
