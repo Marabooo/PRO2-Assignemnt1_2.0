@@ -89,5 +89,14 @@ public class ViewModel {
     reserveVinyl(vinylId, currentUserId);
   }
 
+  public boolean addUser(String username) {
+    // Logic to add a user
+    return true; // return true if successful
+  }
+
+  public boolean addVinyl(String title, String artist, int releaseYear) {
+    // Logic to add a vinyl
+    return true; // return true if successful
+  }
 
 }

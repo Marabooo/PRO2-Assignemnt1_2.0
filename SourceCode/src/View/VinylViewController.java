@@ -6,8 +6,12 @@ import ViewModel.ViewModel;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
 
 public class VinylViewController {
 
@@ -104,6 +108,40 @@ public class VinylViewController {
         viewModel.unmarkForRemoval(selected.getId());
         updateUI();
       }).start();
+    }
+  }
+
+  @FXML
+  public void openAddUserWindow() {
+    try {
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/AddUserView.fxml"));
+      Parent root = loader.load();
+      AddUserController controller = loader.getController();
+      controller.initViewModel(viewModel);
+
+      Stage stage = new Stage();
+      stage.setTitle("Add User");
+      stage.setScene(new Scene(root));
+      stage.show();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  @FXML
+  public void openAddVinylWindow() {
+    try {
+      FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/AddVinylView.fxml"));
+      Parent root = loader.load();
+      AddVinylController controller = loader.getController();
+      controller.initViewModel(viewModel);
+
+      Stage stage = new Stage();
+      stage.setTitle("Add Vinyl");
+      stage.setScene(new Scene(root));
+      stage.show();
+    } catch (Exception e) {
+      e.printStackTrace();
     }
   }
 }
