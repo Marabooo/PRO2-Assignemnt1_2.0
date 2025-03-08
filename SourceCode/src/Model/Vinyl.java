@@ -68,16 +68,18 @@ public class Vinyl
 
 
 
-  public void setReservedBy( User user)
+  public void setReservedBy( Integer userId)
   {
     if (reservedBy != null || isMarkedForRemoval)
     {
       throw new IllegalArgumentException("Vinyl cannot be reserved.");
     }
-    reservedBy = user.getId();
+    reservedBy = userId;
   }
-
-
+  public Integer getReservedBy ()
+  {
+    return reservedBy;
+  }
   
 
 

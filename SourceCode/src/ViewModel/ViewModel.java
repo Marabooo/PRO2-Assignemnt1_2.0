@@ -3,7 +3,7 @@ package ViewModel;
 //this code not done yet, still testing
 
 
-import Model.Vinyl;
+import Model.*;
 import States.VinylState;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,11 +13,18 @@ public class ViewModel {
   private final ObservableList<Vinyl> vinyls = FXCollections.observableArrayList();
   private final Random random = new Random();
 
+  private User currentUser;
+
   public ViewModel() {
     Thread vinylAdderThread = new Thread(this::startVinylAdder);
     vinylAdderThread.setDaemon(true);
     vinylAdderThread.start();
   }
+
+  public void setCurrentUser(User user) {
+    this.currentUser = user;
+  }
+
 
   public ObservableList<Vinyl> getVinyls() { return vinyls; }
 
@@ -49,12 +56,14 @@ public class ViewModel {
         });
   }
 
-  public void reserveVinyl(int id, int Id) {
+  public void reserveVinyl(int vinylId, int userId)
+  {
     vinyls.stream()
-        .filter(v -> v.getId() == id && !v.isReserved()) // Ensure isReserved() is correct
+        .filter(v -> v.getId() == vinylId && v.getReservedBy() == null)
         .findFirst()
-        .ifPresent(v -> v.setReserved(true)); // FIXED: Actually reserves it
+        .ifPresent(v -> v.setReservedBy(userId));
   }
+
 
   private void startVinylAdder() {
     while (true) {
@@ -72,4 +81,11 @@ public class ViewModel {
     Vinyl newVinyl = new Vinyl(random.nextInt(1000), "Random Album", "Random Artist", 2000 + random.nextInt(25));
     vinyls.add(newVinyl);
   }
+
+  public void onReserveButtonClicked(int vinylId) {
+    // currentUser is stored in the ViewModel as the active user.
+    int currentUserId = currentUser.getId();
+    reserveVinyl(vinylId, currentUserId);
+  }
+
 }
