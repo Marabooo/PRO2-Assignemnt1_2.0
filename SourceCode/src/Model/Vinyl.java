@@ -25,7 +25,7 @@ public class Vinyl implements Serializable
 
 
 
-  public Vinyl(int i, String title, String artist, int releaseYear)
+  public Vinyl(String title, String artist, int releaseYear)
   {
     this.title = title;
     this.artist = artist;
@@ -41,9 +41,7 @@ public class Vinyl implements Serializable
   {
     // Required for XML decoding;
     // gave it default values, but they won't matter
-    this.title = "Wouldn't you like to hear this?";
-    this.artist = "Best Artist Who Ever Lived";
-    this.releaseYear = 2424;
+   this("Wouldn't you like to hear this?", "Greatest Artist Who Ever Lived", 2424);
   }
   //
   //setters and getters
@@ -212,8 +210,16 @@ public class Vinyl implements Serializable
   }
 
   // generate equals and hashCode
-  
 
+
+
+  //
+  //testing relevant methods
+  //
+  public static void resetCounter()
+  {
+    nextId = 1;
+  }
   // Mara and Ana
 
 }

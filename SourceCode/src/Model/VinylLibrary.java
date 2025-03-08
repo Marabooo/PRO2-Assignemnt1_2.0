@@ -64,5 +64,12 @@ public class VinylLibrary implements Serializable
     }
     return s.toString();
   }
-
+  //
+  //testing relevant methods
+  //
+  public void clear()
+  {
+    users.clear();
+    vinyls.clear();
+  }
 }

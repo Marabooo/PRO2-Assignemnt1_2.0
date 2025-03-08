@@ -11,25 +11,32 @@ public class User implements Serializable
   private static int nextId = 1;
   private int id;
 
-  public User (String name)
+  public User(String name)
   {
     this.name = name;
     this.id = nextId++;
   }
-  public User() {
+
+  public User()
+  {
     // Required for XML decoding;
     // gave it a default name, but it won't matter
-    this.name = "Lola Bunny";
+    this(
+        "Lola Bunny"); //writing like this calls an user that gets an automatic id
   }
 
-  public String getName (){
+  public String getName()
+  {
     return name;
   }
+
   public int getId()
   {
     return id;
   }
-  public void setName(String name){
+
+  public void setName(String name)
+  {
     this.name = name;
   }
 
@@ -51,5 +58,11 @@ public class User implements Serializable
     return Objects.hash(name, id);
   }
 
-
+  //
+  //testing relevant methods
+  //
+  public static void resetCounter()
+  {
+    nextId = 1;
+  }
 }
