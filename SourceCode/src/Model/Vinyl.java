@@ -109,6 +109,10 @@ public class Vinyl implements Serializable
   public VinylState getState() {
     return currentState;
   }
+  public boolean isMarkedForRemoval()
+  {
+    return isMarkedForRemoval;
+  }
 
     //
    // - Setters (Used by States) -

@@ -1,6 +1,6 @@
 package View;
 
-import ViewModel.ViewModel;
+import ViewModel.*;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -12,9 +12,9 @@ public class AddVinylController {
   @FXML private Button addVinylButton;
   @FXML private Label statusLabel;
 
-  private ViewModel viewModel;
+  private VinylViewModel viewModel;
 
-  public void initViewModel(ViewModel viewModel) {
+  public void initViewModel(VinylViewModel viewModel) {
     this.viewModel = viewModel;
   }
 
@@ -33,21 +33,19 @@ public class AddVinylController {
       int releaseYear = Integer.parseInt(releaseYearText);
 
       new Thread(() -> {
-        boolean success = viewModel.addVinyl(title, artist, releaseYear);
+        viewModel.addVinyl(title, artist, releaseYear);
         Platform.runLater(() -> {
-          if (success) {
             statusLabel.setText("Vinyl added successfully!");
             titleField.clear();
             artistField.clear();
             releaseYearField.clear();
-          } else {
-            statusLabel.setText("Failed to add vinyl.");
-          }
         });
       }).start();
 
     } catch (NumberFormatException e) {
       statusLabel.setText("Release year must be a number.");
+    } catch (IllegalArgumentException e) {
+      statusLabel.setText("Failed to add vinyl.");
     }
   }
 }

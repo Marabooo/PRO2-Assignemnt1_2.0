@@ -1,7 +1,6 @@
 package Storage;
 
-import Model.Vinyl;
-import Model.User;
+import Model.*;
 import java.beans.XMLEncoder;
 import java.beans.XMLDecoder;
 import java.io.FileOutputStream;

@@ -11,19 +11,26 @@ public class User implements Serializable
   private static int nextId = 1;
   private int id;
 
+  public User adminUser = new User("admin",0);//creating an admin user for testing purposes
+
   public User(String name)
   {
     this.name = name;
     this.id = nextId++;
+  }
+  public User (String name, int id)
+  {
+    this.name = name;
+    this.id = id;
   }
 
   public User()
   {
     // Required for XML decoding;
     // gave it a default name, but it won't matter
-    this(
-        "Lola Bunny"); //writing like this calls an user that gets an automatic id
+    this("Lola Bunny"); //writing like this calls a user that gets an automatic id
   }
+
 
   public String getName()
   {

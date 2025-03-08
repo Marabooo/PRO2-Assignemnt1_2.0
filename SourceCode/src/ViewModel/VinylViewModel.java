@@ -41,51 +41,69 @@ public class VinylViewModel {
     vinyls.setAll(vinylLibrary.getVinyls()); // Updating the UI When the Model Changes
   }
 
+  public void addVinyl(String title, String artist, int releaseYear) {
+    Vinyl newVinyl = new Vinyl(title, artist, releaseYear);
+    vinylLibrary.addVinyl(newVinyl);
+    updateVinyls();
+  }
+  public void addUsers(String username) {
+    User newUser = new User(username);
+    vinylLibrary.addUser(newUser);
+    updateVinyls();
+  }
+  public int getUserId()
+  {
+    return 0;
+  }
+
 public void unreserveVinyl(Vinyl vinyl) {
     if (vinyl != null) {
-      vinyl.onUnreserveButtonPress();
+      vinyl.unreserve();
       updateVinyls();
     }
   }
-   public void unmarkForRemoval(Vinyl vinyl) {
-    if (vinyl != null) {
-      vinyl.onUnmarkForRemovalButtonPress();
-      updateVinyls();
-    }
-  }
+   public void unmarkForRemoval(Vinyl vinyl)
+   {
+      if (vinyl != null)
+      {
+        vinyl.unmarkForRemoval();
+        updateVinyls();
+      }
+   }
 
 
-  public void borrowVinyl(Vinyl vinyl) {
+  public void borrowVinyl(Vinyl vinyl, User user) {
     if (vinyl != null) {
-      vinyl.onBorrowButtonPress();
+      vinyl.borrow(user.getId()
+      );
       updateVinyls();
     }
   }
-
-  public void reserveVinyl(Vinyl vinyl) {
-    if (vinyl != null) {
-      vinyl.onReserveButtonPress();
-      updateVinyls();
-    }
-  }
-  public void returnVinyl(Vinyl vinyl) {
-    if (vinyl != null) {
-      vinyl.onReturnButtonPress();
-      updateVinyls();
-    }
-  }
+//
+//  public void reserveVinyl(Vinyl vinyl) {
+//    if (vinyl != null) {
+//      vinyl.onReserveButtonPress();
+//      updateVinyls();
+//    }
+//  }
+//  public void returnVinyl(Vinyl vinyl) {
+//    if (vinyl != null) {
+//      vinyl.onReturnButtonPress();
+//      updateVinyls();
+//    }
+//  }
 
   //If a Vinyl is not borrowed or reserved, it is removed from the library.
   //If it is still in use, it is flagged for removal.
-  public void removeVinyl(Vinyl vinyl) {
-    if (vinyl != null && vinyl.isMarkedForRemoval()) {
-      vinylLibrary.removeVinyl(vinyl);
-      updateVinyls();
-    } else {
-      vinyl.onMarkForRemovalButtonPress();
-      updateVinyls();
-    }
-  }
+//  public void removeVinyl(Vinyl vinyl) {
+//    if (vinyl != null && vinyl.isMarkedForRemoval()) {
+//      vinylLibrary.removeVinyl(vinyl);
+//      updateVinyls();
+//    } else {
+//      vinyl.onMarkForRemovalButtonPress();
+//      updateVinyls();
+//    }
+//  }
 
 
   /*private final Random random = new Random();

@@ -1,8 +1,6 @@
 package Test;
 
-import Model.User;
-import Model.Vinyl;
-import Model.VinylLibrary;
+import Model.*;
 import Storage.XMLStorage;
 import java.util.List;
 

@@ -47,8 +47,8 @@ public class VinylViewController {
   //if we add these methods in the viewmodel, it is NOT good, the View directly modifies the Model
   // The UI should not interact directly with Vinyl.
   // It should use the ViewModel as an intermediary. Correct - View Controller calls ViewModel
-  public void onBorrowButtonPressed(Vinyl userId) {
-    viewModel.borrowVinyl(userId);
+  public void onBorrowButtonPressed(Vinyl vinyl, User user) {
+    viewModel.borrowVinyl(vinyl, user);
   }
 
   public void onReserveButtonPressed(Vinyl userId) {
@@ -70,9 +70,10 @@ public class VinylViewController {
   @FXML
   public void borrowVinyl() {
     Vinyl selected = vinylTable.getSelectionModel().getSelectedItem();
+    User adminUser = new User("admin", 0);
     if (selected != null) {
       new Thread(() -> {
-        viewModel.borrowVinyl(selected.getId());
+        viewModel.borrowVinyl(selected, selectedUser);
         updateUI();
       }).start();
     }
@@ -105,7 +106,7 @@ public class VinylViewController {
     Vinyl selected = vinylTable.getSelectionModel().getSelectedItem();
     if (selected != null) {
       new Thread(() -> {
-        viewModel.unreserveVinyl(selected.getId());
+        viewModel.unreserveVinyl(selected);
         updateUI();
       }).start();
     }
@@ -127,7 +128,7 @@ public class VinylViewController {
     Vinyl selected = vinylTable.getSelectionModel().getSelectedItem();
     if (selected != null) {
       new Thread(() -> {
-        viewModel.unmarkForRemoval(selected.getId());
+        viewModel.unmarkForRemoval(selected);
         updateUI();
       }).start();
     }

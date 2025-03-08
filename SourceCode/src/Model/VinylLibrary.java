@@ -25,6 +25,10 @@ public class VinylLibrary implements Serializable
   {
     users.add(user);
   }
+  public int getUserId()
+  {
+    return 0;
+  }
 
   public void addVinyl(Vinyl vinyl)
   {

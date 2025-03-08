@@ -1,7 +1,7 @@
 
 package View;
 
-import ViewModel.ViewModel;
+import ViewModel.*;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -11,9 +11,9 @@ public class AddUserController {
   @FXML private Button addUserButton;
   @FXML private Label statusLabel;
 
-  private ViewModel viewModel;
+  private VinylViewModel viewModel;
 
-  public void initViewModel(ViewModel viewModel) {
+  public void initViewModel(VinylViewModel viewModel) {
     this.viewModel = viewModel;
   }
 
@@ -27,7 +27,7 @@ public class AddUserController {
     }
 
     new Thread(() -> {
-      boolean success = viewModel.addUser(username);
+      boolean success = viewModel.addUser(user);
       Platform.runLater(() -> {
         if (success) {
           statusLabel.setText("User added successfully!");
