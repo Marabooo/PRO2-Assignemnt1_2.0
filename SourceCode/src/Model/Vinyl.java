@@ -3,10 +3,13 @@ import States.*;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Vinyl
+public class Vinyl implements Serializable
 {
+  @Serial private static final long serialVersionUID = 1L;
   private String title;
   private String artist;
   private int releaseYear;

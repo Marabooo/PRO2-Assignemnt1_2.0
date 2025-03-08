@@ -1,9 +1,12 @@
 package Model;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.Objects;
 
-public class User
+public class User implements Serializable
 {
+  @Serial private static final long serialVersionUID = 1L;
   private String name;
   private static int nextId = 1;
   private int id;
