@@ -1,4 +1,13 @@
-package Model;
+
+
+
+// Moved to VinylLibrary class
+
+
+
+
+
+/*package Model;
 import States.*;
 
 import java.io.Serial;
@@ -32,7 +41,7 @@ public class VinylList implements Serializable
     }
     this.vinyls.remove(vinyl);
   }
-  
+
   public List<Vinyl> getVinylList()
   {
     return this.vinyls;
@@ -51,4 +60,5 @@ public class VinylList implements Serializable
   }
 
 }
+  */
   

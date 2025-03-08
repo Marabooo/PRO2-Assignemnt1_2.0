@@ -24,15 +24,41 @@ public class VinylLibrary implements Serializable
 
   public void addVinyl(Vinyl vinyl)
   {
-    vinyls.add(vinyl);
+    if (vinyl == null)
+      {
+        throw new IllegalArgumentException("Vinyl cannot be null");
+      }
+    this.vinyls.add(vinyl);
   }
 
   public void removeUser(User user){
     users.remove(user);
   }
 
-  public void removeVinyl(Vinyl vinyl){
-    vinyls.remove(vinyl);
+  public void removeVinyl(Vinyl vinyl)
+  {
+    if (!vinyl.isMarkedForRemoval())
+    {
+      throw new IllegalArgumentException("Vinyl is not marked for removal");
+    }
+    this.vinyls.remove(vinyl);
+  }
+
+  public List<Vinyl> getVinylList()
+  {
+    return this.vinyls;
+  }
+  
+  @Override
+  public String toString()
+  {
+    StringBuilder s = new StringBuilder();
+    for (Vinyl vinyl : vinyls)
+    {
+      s.append(vinyl.toString());
+      s.append("\n");
+    }
+    return s.toString();
   }
 
 }
