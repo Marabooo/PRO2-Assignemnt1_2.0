@@ -68,7 +68,7 @@ public class Vinyl
 
 
 
-  public void setReservedBy( Integer userId)
+  public void setReservedBy(Integer userId)
   {
     if (reservedBy != null || isMarkedForRemoval)
     {
@@ -83,13 +83,13 @@ public class Vinyl
   
 
 
-  public void setBorrowed(User user)
+  public void setBorrowedBy(Integer userId)
   {
-    if (borrowedBy != null || (reservedBy != null && reservedBy != user.getId())|| (isMarkedForRemoval && reservedBy == null))
+    if (borrowedBy != null || (reservedBy != null && reservedBy.equals(userId))|| (isMarkedForRemoval && reservedBy == null))
     {
       throw new IllegalArgumentException("Vinyl cannot be borrowed.");
     }
-    borrowedBy = user.getId();
+    borrowedBy = userId;
   }
 
   public VinylState getState()
