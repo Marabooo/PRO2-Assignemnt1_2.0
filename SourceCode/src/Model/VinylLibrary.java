@@ -13,8 +13,8 @@ public class VinylLibrary implements Serializable
 
   public VinylLibrary()
   {
-    this.users = new ArrayList<>();
-    this.vinyls = new ArrayList<>();
+    this.users = new ArrayList<User>();
+    this.vinyls = new ArrayList<Vinyl>();
   }
 
   public void addUser(User user)

@@ -32,6 +32,7 @@ public class VinylList implements Serializable
     }
     this.vinyls.remove(vinyl);
   }
+  
   public List<Vinyl> getVinylList()
   {
     return this.vinyls;
@@ -50,3 +51,4 @@ public class VinylList implements Serializable
   }
 
 }
+  

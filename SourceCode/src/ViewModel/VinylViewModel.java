@@ -8,13 +8,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import java.util.*;
 
-public class ViewModel {
+public class VinylViewModel {
   private final ObservableList<Vinyl> vinyls = FXCollections.observableArrayList();
   private final Random random = new Random();
 
   private User currentUser;
 
-  public ViewModel() {
+  public VinylViewModel() {
     Thread vinylAdderThread = new Thread(this::startVinylAdder);
     vinylAdderThread.setDaemon(true);
     vinylAdderThread.start();
