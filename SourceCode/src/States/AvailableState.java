@@ -2,34 +2,49 @@ package States;
 import Model.*;
 
 public class AvailableState implements VinylState {
-  public AvailableState() {
+  /*public AvailableState() {
     System.out.println(" ");
     System.out.println(" Vinyl is Available ");
+  }*/
+
+  @Override
+  public void borrow(Vinyl vinyl, int userId) {
+    // Allow borrow if:
+    // - Not flagged for removal, OR
+    // - Flagged but user is the reserver
+    if (!vinyl.isMarkedForRemoval() || userId == vinyl.getReservedBy()){
+      vinyl.setBorrowedBy(userId);
+      //vinyl.setState(new BorrowedState());
+      vinyl.changeToBorrowedState();
+    }
+
   }
 
-  public void onBorrowButtonPress(Vinyl vinyl) {
-    System.out.println(" Borrowing available vinyl ... ");
-    vinyl.changeToBorrowedState();
+  public void returnVinyl(Vinyl vinyl) {
+    // Do nothing (Available vinyls can't be returned)
   }
 
-  public void onReturnButtonPress(Vinyl vinyl) {
-    // do nothing
+  @Override
+  public void reserve(Vinyl vinyl, int userId) {
+    if (!vinyl.isMarkedForRemoval()){
+      vinyl.setReservedBy(userId);
+      //vinyl.setState(new AvailableAndReservedState());
+      vinyl.changeToAvailableAndReservedState();
+    }
   }
 
-  public void onReserveButtonPress(Vinyl vinyl) {
-    System.out.println(" Reserving available vinyl ... ");
-    vinyl.changeToAvailableAndReservedState();
+  public void unreserve(Vinyl vinyl) {
+    // Do nothing
   }
 
-  public void onUnreserveButtonPress(Vinyl vinyl) {
-    // do nothing
+  /*
+  @Override
+  public String getStatus() //i need to fix this in Vinyl
+  {
+    return "Available";
   }
 
-  public void onMarkForRemovalButtonPress(Vinyl vinyl) {
-    System.out.println("Changing flag to -> For REMOVAL ");
-  }
 
-  public void onUnmarkForRemovalButtonPress(Vinyl vinyl) {
-    System.out.println(" Removing removal flag ");
-  }
+   */
+
 }
