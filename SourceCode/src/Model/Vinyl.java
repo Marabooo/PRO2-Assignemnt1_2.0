@@ -48,11 +48,18 @@ public class Vinyl implements Serializable
 
   public void borrow(Integer userId){
     currentState.borrow(this, userId);
+    this.borrowedBy = userId;
   }
-  public void returnVinyl(){
 
+
+  public void returnVinyl(){
+    if(borrowedBy == null){
+      System.out.println("Error: Cannot return vinyl because borrowedBy is null");
+      return; //exit method, do it because running main it shows mistake
+    }
     currentState.returnVinyl(this, borrowedBy);
   }
+
   public void reserve(Integer userId){
     currentState.reserve(this, userId);
   }
@@ -130,7 +137,7 @@ public class Vinyl implements Serializable
   public void setBorrowedBy(Integer userId) {
     Integer old = this.borrowedBy;
     this.borrowedBy = userId;
-    pcs.firePropertyChange("borroedBy", old, userId);
+    pcs.firePropertyChange("borrowedBy", old, userId);
   }
 
   // ----- Mara: These 4 methods can be all merged into one Ana already made:

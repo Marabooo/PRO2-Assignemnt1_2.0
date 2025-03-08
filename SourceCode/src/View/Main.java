@@ -23,7 +23,7 @@ public class Main extends Application {
 
     // Load your main view and set its view model via the controller
     FXMLLoader loader = new FXMLLoader(
-        getClass().getResource("/View/VinylView.fxml"));
+        getClass().getResource("/View/VinylLibrary.fxml"));
     Parent root = loader.load();
     // Assuming your VinylViewController has an initViewModel method.
     View.VinylViewController controller = loader.getController();

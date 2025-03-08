@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
@@ -16,14 +15,14 @@
     </TableView>
 
     <HBox spacing="10" />
-    <Button fx:id="MarkForRemovalButton" layoutX="14.0" layoutY="290.0" mnemonicParsing="false" prefHeight="64.0" prefWidth="110.0" text="Mark for Removal" />
-    <Button fx:id="UnreserveButton" layoutX="14.0" layoutY="228.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="110.0" text="Unreserved" />
-    <Button fx:id="BorrowButton" layoutX="14.0" layoutY="44.0" onAction="#borrowVinyl" prefHeight="54.0" prefWidth="110.0" text="Borrow" />
-    <Button fx:id="ReserveButton" layoutX="14.0" layoutY="166.0" onAction="#reserveVinyl" prefHeight="54.0" prefWidth="110.0" text="Reserve" />
-    <Button fx:id="ReturnButton" layoutX="14.0" layoutY="105.0" onAction="#returnVinyl" prefHeight="54.0" prefWidth="110.0" text="Return" />
-    <Button fx:id="UnmarkforRemovalButton" ellipsisString=" " layoutX="14.0" layoutY="363.0" mnemonicParsing="false" prefHeight="54.0" prefWidth="110.0" text="Unmark for Removal" textAlignment="CENTER" wrapText="true" />
-    <opaqueInsets>
-        <Insets top="10.0" />
-    </opaqueInsets>
+    <Button fx:id="MarkfotRemovalButton" layoutX="14.0" layoutY="237.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="110.0" text="Mark for Removal" />
+    <Button fx:id="UnreserveButton" layoutX="14.0" layoutY="188.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="110.0" text="Unreserved" />
+    <Button fx:id="BorrowButton" layoutX="14.0" layoutY="43.0" onAction="#borrowVinyl" prefHeight="40.0" prefWidth="110.0" text="Borrow" />
+    <Button fx:id="ReserveButton" layoutX="14.0" layoutY="139.0" onAction="#reserveVinyl" prefHeight="40.0" prefWidth="110.0" text="Reserve" />
+    <Button fx:id="ReturnButton" layoutX="14.0" layoutY="91.0" onAction="#returnVinyl" prefHeight="40.0" prefWidth="110.0" text="Return" />
+    <Button fx:id="UnmarkforRemovalButton" ellipsisString=" " layoutX="14.0" layoutY="284.0" mnemonicParsing="false" prefHeight="40.0" prefWidth="110.0" text="Unmark for Removal" textAlignment="CENTER" wrapText="true" />
 
+    <!-- New Buttons for Add User and Add Vinyl -->
+    <Button fx:id="AddUserButton" layoutX="14.0" layoutY="333.0" onAction="#openAddUserWindow" prefHeight="40.0" prefWidth="110.0" text="Add User" />
+    <Button fx:id="AddVinylButton" layoutX="14.0" layoutY="380.0" onAction="#openAddVinylWindow" prefHeight="40.0" prefWidth="110.0" text="Add Vinyl" />
 </AnchorPane>
