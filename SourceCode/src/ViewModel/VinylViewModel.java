@@ -79,7 +79,7 @@ public class VinylViewModel {
   }
 
   private void addRandomVinyl() {
-    Vinyl newVinyl = new Vinyl(random.nextInt(1000), "Random Album", "Random Artist", 2000 + random.nextInt(25));
+    Vinyl newVinyl = new Vinyl( "Random Album", "Random Artist", 2000 + random.nextInt(25));
     vinyls.add(newVinyl);
   }
 

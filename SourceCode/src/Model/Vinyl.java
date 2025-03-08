@@ -20,11 +20,12 @@ public class Vinyl implements Serializable
   private VinylState currentState;
   private boolean isMarkedForRemoval;
   //private VinylState state; //can lead to confusions
-  private PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+  private transient PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+  //made transient so it won't be serialized
 
 
 
-  public Vinyl(int i, String title, String artist, int releaseYear)
+  public Vinyl(String title, String artist, int releaseYear)
   {
     this.title = title;
     this.artist = artist;
@@ -35,7 +36,13 @@ public class Vinyl implements Serializable
     this.isMarkedForRemoval = false;
     this.id = nextId++;
   }
+  public Vinyl()
 
+  {
+    // Required for XML decoding;
+    // gave it default values, but they won't matter
+   this("Wouldn't you like to hear this?", "Greatest Artist Who Ever Lived", 2424);
+  }
   //
   //setters and getters
   //
@@ -203,8 +210,16 @@ public class Vinyl implements Serializable
   }
 
   // generate equals and hashCode
-  
 
+
+
+  //
+  //testing relevant methods
+  //
+  public static void resetCounter()
+  {
+    nextId = 1;
+  }
   // Mara and Ana
 
 }

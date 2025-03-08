@@ -30,6 +30,10 @@ public class VinylLibrary implements Serializable
       }
     this.vinyls.add(vinyl);
   }
+  public List<User> getUsers()
+  {
+    return users;
+  }
 
   public void removeUser(User user){
     users.remove(user);
@@ -46,7 +50,7 @@ public class VinylLibrary implements Serializable
 
   public List<Vinyl> getVinylList()
   {
-    return this.vinyls;
+    return vinyls;
   }
   
   @Override
@@ -60,5 +64,12 @@ public class VinylLibrary implements Serializable
     }
     return s.toString();
   }
-
+  //
+  //testing relevant methods
+  //
+  public void clear()
+  {
+    users.clear();
+    vinyls.clear();
+  }
 }
