@@ -17,6 +17,10 @@ public class VinylLibrary implements Serializable
     this.vinyls = new ArrayList<Vinyl>();
   }
 
+  public List<Vinyl> getVinyls() {
+    return new ArrayList<>(vinyls); // Return a copy to avoid modification issues
+  }
+
   public void addUser(User user)
   {
     users.add(user);

@@ -44,6 +44,28 @@ public class VinylViewController {
     Platform.runLater(() -> vinylTable.refresh());
   }
 
+  //if we add these methods in the viewmodel, it is NOT good, the View directly modifies the Model
+  // The UI should not interact directly with Vinyl.
+  // It should use the ViewModel as an intermediary. Correct - View Controller calls ViewModel
+  public void onBorrowButtonPressed(Vinyl userId) {
+    viewModel.borrowVinyl(userId);
+  }
+
+  public void onReserveButtonPressed(Vinyl userId) {
+    viewModel.reserveVinyl(userId);
+  }
+
+  public void onReturnButtonPressed(Vinyl userId) {
+    viewModel.returnVinyl(userId);
+  }
+
+  public void onUnreserveButtonPressed(Vinyl userId) {
+    viewModel.unreserveVinyl(userId);
+  }
+
+  public void onMarkForRemovalButtonPressed(Vinyl userId) {
+    viewModel.markForRemoval(userId);
+  }
 
   @FXML
   public void borrowVinyl() {
