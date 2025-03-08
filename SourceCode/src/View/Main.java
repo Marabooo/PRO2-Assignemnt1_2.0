@@ -33,6 +33,9 @@ public class Main extends Application {
     primaryStage.setScene(new Scene(root));
     primaryStage.show();
 
+
+
+    controller.initViewModel(viewModel);
 //    // Optionally add a close handler if you want to do additional processing.
 //    primaryStage.setOnCloseRequest(e -> {
 //      // Save data when the window closes.

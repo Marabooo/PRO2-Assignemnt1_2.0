@@ -43,6 +43,8 @@ import java.util.Objects;
 
   public void setName(String name)
   {
+    if (name == null || name.isEmpty()) //validation , name is not null or empty
+      throw new IllegalArgumentException("Name cannot be null or empty");
     this.name = name;
   }
 
