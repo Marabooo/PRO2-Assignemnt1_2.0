@@ -23,17 +23,17 @@ public class UserSimulator implements Runnable {
   public void run() {
     while (true) {
       try {
-        // Sleep between 2-5 seconds before performing an action.
-        Thread.sleep(2000 + random.nextInt(3000));
+        // wait 1-3 seconds
+        Thread.sleep(1000 + random.nextInt(2000));
       } catch (InterruptedException e) {
-        break; // exit if interrupted
+        break;
       }
 
       List<Vinyl> vinyls = library.getVinylList();
       List<User> users = library.getUsers();
 
       if (vinyls.isEmpty() || users.isEmpty()) {
-        continue; // skip if no data available
+        continue; // skip if no data
       }
 
       // Pick a random vinyl and user.
