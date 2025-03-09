@@ -1,0 +1,23 @@
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <!-- Group ID: Use anything (e.g., your GitHub username) -->
+  <groupId>com.example</groupId>
+  <!-- Artifact ID: Your project name (match your GitHub repo) -->
+  <artifactId>PRO2-Assignment1_2.0</artifactId>
+  <version>1.0-SNAPSHOT</version>
+
+  <dependencies>
+    <!-- JavaFX Dependencies (Add only what you need) -->
+    <dependency>
+      <groupId>org.openjfx</groupId>
+      <artifactId>javafx-controls</artifactId>
+      <version>20.0.2</version>
+    </dependency>
+    <dependency>
+      <groupId>org.openjfx</groupId>
+      <artifactId>javafx-fxml</artifactId>
+      <version>20.0.2</version>
+    </dependency>
+    <!-- Add more JavaFX modules if needed (e.g., javafx-graphics, javafx-media) -->
+  </dependencies>
+</project>
