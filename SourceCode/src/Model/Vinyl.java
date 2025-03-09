@@ -53,7 +53,7 @@ public class Vinyl implements Serializable
 
 
   public void returnVinyl(Integer userId){
-    if(borrowedBy == null || borrowedBy != userId){
+    if(borrowedBy == null || !borrowedBy.equals(userId)){
       throw new IllegalStateException("Cannot return vinyl. It is not borrowed by this user.");
     }
     currentState.returnVinyl(this, borrowedBy);
@@ -115,6 +115,11 @@ public class Vinyl implements Serializable
   public void setId(int id) {
     this.id = id;
   }// needed for XML serialization
+  public static void setNextId(int next)
+  {
+    nextId = next;
+  }//XML again
+
   public VinylState getState() {
     return currentState;
   }

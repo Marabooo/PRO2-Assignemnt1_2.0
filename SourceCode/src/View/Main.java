@@ -22,12 +22,32 @@ public class Main extends Application {
     List<User> loadedUsers = XMLStorage.loadUsersFromXML("users.xml");
 
     // If no data was loaded, use empty lists.
-    if (loadedVinyls == null) {
-      loadedVinyls = new ArrayList<>();
-    }
-    if (loadedUsers == null) {
-      loadedUsers = new ArrayList<>();
-    }
+    if (loadedVinyls == null)
+      {
+        loadedVinyls = new ArrayList<>();
+      }
+    if (loadedUsers == null)
+      {
+        loadedUsers = new ArrayList<>();
+      }
+    // Set the next ID for the User and Vinyl classes based on the loaded data.
+    if (!loadedUsers.isEmpty())
+      {
+        int maxUserId = loadedUsers.stream()
+            .mapToInt(User::getId)
+            .max()
+            .orElse(0);
+        User.setNextId(maxUserId + 1);
+      }
+    if (!loadedVinyls.isEmpty())
+      {
+        int maxVinylId = loadedVinyls.stream()
+            .mapToInt(Vinyl::getId)
+            .max()
+            .orElse(0);
+        Vinyl.setNextId(maxVinylId + 1);
+      }
+
 
     // Create the library with persisted data.
     VinylLibrary library = new VinylLibrary(loadedUsers, loadedVinyls);

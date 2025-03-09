@@ -8,20 +8,24 @@ public class AvailableState implements VinylState {
   }*/
 
   @Override
-  public void borrow(Vinyl vinyl, int userId) {
+  public void borrow(Vinyl vinyl, int userId)
+  {
     // Allow borrow if:
     // - Not flagged for removal, OR
     // - Flagged but user is the reserver
-    if (!vinyl.isMarkedForRemoval() || userId == vinyl.getReservedBy()){
+    if (vinyl.isMarkedForRemoval())
+    {
+      throw new IllegalArgumentException("Vinyl is not available for borrowing");
+    }
       vinyl.setBorrowedBy(userId);
       vinyl.setState(new BorrowedState());
-      //vinyl.changeToBorrowedState();
     }
 
-  }
+
 
   public void returnVinyl(Vinyl vinyl, int userId) {
     // Do nothing (Available vinyls can't be returned)
+    throw new IllegalArgumentException("Vinyl is not borrowed.");
   }
 
   @Override
@@ -29,7 +33,6 @@ public class AvailableState implements VinylState {
     if (!vinyl.isMarkedForRemoval()){
       vinyl.setReservedBy(userId);
       vinyl.setState(new AvailableAndReservedState());
-      //vinyl.changeToAvailableAndReservedState();
     }
   }
 

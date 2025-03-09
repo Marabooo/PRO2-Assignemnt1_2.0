@@ -72,11 +72,11 @@ public class VinylViewController
 
   public void onReturnButtonPressed(Vinyl vinyl)
   {
-    viewModel.returnVinyl(vinyl);
+    viewModel.returnVinyl(vinyl, User.adminUser);
   }
 
   public void onUnreserveButtonPressed(Vinyl vinyl, User user) {
-    viewModel.unreserveVinyl(vinyl, user);
+    viewModel.unreserveVinyl(vinyl, User.adminUser);
   }
 
   public void onMarkForRemovalButtonPressed(Vinyl vinyl)
@@ -123,7 +123,7 @@ public class VinylViewController
     if (selected != null)
     {
       new Thread(() -> {
-        viewModel.returnVinyl(selected);
+        viewModel.returnVinyl(selected, User.adminUser);
         log( "Vinyl: " +  selected.getTitle() + " Returned by: " + User.adminUser.getName());
         Platform.runLater(this::updateUI);
       }).start();

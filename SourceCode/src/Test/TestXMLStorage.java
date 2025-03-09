@@ -10,8 +10,8 @@ import java.util.List;
 public class TestXMLStorage {
   public static void main(String[] args) {
     // Reset ID counters for a fresh start.
-    User.resetCounter();
-    Vinyl.resetCounter();
+//    User.resetCounter();
+//    Vinyl.resetCounter();
 
     // Create a new VinylLibrary instance and clear its data.
     VinylLibrary testLibrary = new VinylLibrary();

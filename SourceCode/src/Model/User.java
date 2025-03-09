@@ -50,11 +50,16 @@ import java.util.Objects;
 
   // needed for XML serialization
   public void setId(int id)
-  {
-    this.id = id;
-  }
+    {
+      this.id = id;
+    }
+  public static void setNextId(int next)
+    {
+      nextId = next;
+    }
 
-  @Override public String toString()
+//overrides
+    @Override public String toString()
   {
     return "User: " + "name: '" + this.getName() + '\'' + " id: " + this.getId() + ' ';
   }
@@ -75,8 +80,8 @@ import java.util.Objects;
   //
   //testing relevant methods
   //
-  public static void resetCounter()
-  {
-    nextId = 1;
-  }
+//  public static void resetCounter()
+//  {
+//    nextId = 1;
+//  }
 }

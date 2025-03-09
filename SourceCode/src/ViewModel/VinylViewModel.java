@@ -12,7 +12,6 @@ import java.util.*;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import States.VinylState;
 
 
 public class VinylViewModel {
@@ -76,8 +75,7 @@ public void unreserveVinyl(Vinyl vinyl, User user) {
 
   public void borrowVinyl(Vinyl vinyl, User user) {
     if (vinyl != null) {
-      vinyl.borrow(user.getId()
-      );
+      vinyl.borrow(user.getId());
       updateVinyls();
       saveData();
     }
@@ -90,13 +88,15 @@ public void unreserveVinyl(Vinyl vinyl, User user) {
       saveData();
     }
   }
-  public void returnVinyl(Vinyl vinyl) {
-    if (vinyl != null) {
+  public void returnVinyl(Vinyl vinyl, User user) {
+    if (vinyl == null || user.getId() != vinyl.getBorrowedBy()) {
+      throw new IllegalArgumentException("Vinyl is not borrowed by this user");
+    }
       vinyl.returnVinyl(vinyl.getBorrowedBy());
       updateVinyls();
       saveData();
     }
-  }
+
   public void markForRemoval(Vinyl vinyl) {
     if (vinyl != null) {
       vinyl.markForRemoval();
