@@ -1,6 +1,7 @@
 package View;
 
 import Model.*;
+import Simulation.UserSimulator;
 import Storage.XMLStorage;
 import ViewModel.VinylViewModel;
 import javafx.application.Application;
@@ -36,6 +37,11 @@ public class Main extends Application {
 
     // Created ViewModel with the library
     VinylViewModel viewModel = new VinylViewModel(library);
+
+    // Start the simulation in its own thread
+    Thread simulationThread = new Thread(new UserSimulator(viewModel, library));
+    simulationThread.setDaemon(true);  // so it doesn't block application exit
+    simulationThread.start();
 
 
     // Load your main view and set its view model via the controller

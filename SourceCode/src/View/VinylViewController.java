@@ -36,16 +36,13 @@ public class VinylViewController
       VinylViewController.class.getName());
 
   private VinylViewModel viewModel;
-
-  public void initViewModel(VinylViewModel viewModel)
-  {
+  public void initViewModel(VinylViewModel viewModel) {
     this.viewModel = viewModel;
     vinylTable.setItems(viewModel.getVinyls());
 
     titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
     artistColumn.setCellValueFactory(new PropertyValueFactory<>("artist"));
-    releaseYearColumn.setCellValueFactory(
-        new PropertyValueFactory<>("releaseYear"));
+    releaseYearColumn.setCellValueFactory(new PropertyValueFactory<>("releaseYear"));
     stateColumn.setCellValueFactory(new PropertyValueFactory<>("state"));
     reservedByColumn.setCellValueFactory(
         new PropertyValueFactory<>("reservedBy"));
@@ -55,16 +52,16 @@ public class VinylViewController
         new PropertyValueFactory<>("markedForRemoval"));
   }
 
-  private void updateUI()
-  {
+
+  private void updateUI() {
     Platform.runLater(() -> vinylTable.refresh());
   }
+
 
   //if we add these methods in the viewmodel, it is NOT good, the View directly modifies the Model
   // The UI should not interact directly with Vinyl.
   // It should use the ViewModel as an intermediary. Correct - View Controller calls ViewModel
-  public void onBorrowButtonPressed(Vinyl vinyl, User user)
-  {
+  public void onBorrowButtonPressed(Vinyl vinyl, User user) {
     viewModel.borrowVinyl(vinyl, user);
   }
 
@@ -78,9 +75,8 @@ public class VinylViewController
     viewModel.returnVinyl(vinyl);
   }
 
-  public void onUnreserveButtonPressed(Vinyl vinyl)
-  {
-    viewModel.unreserveVinyl(vinyl);
+  public void onUnreserveButtonPressed(Vinyl vinyl, User user) {
+    viewModel.unreserveVinyl(vinyl, user);
   }
 
   public void onMarkForRemovalButtonPressed(Vinyl vinyl)
@@ -140,8 +136,8 @@ public class VinylViewController
     if (selected != null)
     {
       new Thread(() -> {
-        viewModel.unreserveVinyl(selected);
-        log( "Vinyl: " +  selected.getTitle() + " Unreserved by: " + User.adminUser.getName());
+        viewModel.unreserveVinyl(selected, User.adminUser);
+        log("Unreserved vinyl: " + selected.getTitle());
         Platform.runLater(this::updateUI);
       }).start();
     }

@@ -56,9 +56,9 @@ public class VinylViewModel {
     return 0;
   }
 
-public void unreserveVinyl(Vinyl vinyl) {
+public void unreserveVinyl(Vinyl vinyl, User user) {
     if (vinyl != null) {
-      vinyl.unreserve();
+      vinyl.unreserve(user.getId());
       updateVinyls();
       saveData();
     }
@@ -92,7 +92,7 @@ public void unreserveVinyl(Vinyl vinyl) {
   }
   public void returnVinyl(Vinyl vinyl) {
     if (vinyl != null) {
-      vinyl.returnVinyl();
+      vinyl.returnVinyl(vinyl.getBorrowedBy());
       updateVinyls();
       saveData();
     }

@@ -23,7 +23,10 @@ public class BorrowedAndReservedState implements VinylState {
       // Do nothing (already reserved);
     }
 
-    public void unreserve(Vinyl vinyl) {
+    public void unreserve(Vinyl vinyl, int userId) {
+      if (vinyl.getReservedBy() != userId) {
+        throw new IllegalArgumentException("Vinyl was not reserved by this user");
+      }
       vinyl.setReservedBy(null);
       vinyl.setState(new BorrowedState());
       //vinyl.changeToBorrowedState();

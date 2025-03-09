@@ -29,9 +29,10 @@ public class BorrowedState implements VinylState
     vinyl.setState(new BorrowedAndReservedState());
   }
 
-  public void unreserve(Vinyl vinyl)
+  public void unreserve(Vinyl vinyl, int userId)
   {
     // Do nothing (just borrowed, there is no reservation)
+    System.out.println("Vinyl is not reserved");
   }
 
   /*

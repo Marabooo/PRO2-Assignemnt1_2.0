@@ -33,8 +33,9 @@ public class AvailableState implements VinylState {
     }
   }
 
-  public void unreserve(Vinyl vinyl) {
+  public void unreserve(Vinyl vinyl, int userId) {
     // Do nothing
+    System.out.println("Vinyl is not reserved");
   }
 
   /*
