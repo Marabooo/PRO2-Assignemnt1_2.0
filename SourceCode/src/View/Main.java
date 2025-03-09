@@ -17,6 +17,7 @@ public class Main extends Application {
   @Override
   public void start(Stage primaryStage) throws Exception
   {
+
     // Created VinylLibrary (repository) and xmlStorage lists
     List<Vinyl> loadedVinyls = XMLStorage.loadVinylsFromXML("vinyls.xml");
     List<User> loadedUsers = XMLStorage.loadUsersFromXML("users.xml");
@@ -63,19 +64,30 @@ public class Main extends Application {
     simulationThread.setDaemon(true);  // so it doesn't block application exit
     simulationThread.start();
 
+    //FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/VinylLibrary.fxml"));
+   // Parent root = loader.load();
+   // VinylViewController controller = loader.getController();
+   //controller.initViewModel(viewModel);
+    FXMLLoader loader = null;
+    Parent root = null;
+    try
+    {
+      // Load your main view and set its view model via the controller
+      loader = new FXMLLoader(
+          getClass().getResource("/View/VinylLibrary.fxml"));
+       root = loader.load();
 
-    // Load your main view and set its view model via the controller
-    FXMLLoader loader = new FXMLLoader(
-        getClass().getResource("/View/VinylLibrary.fxml"));
-    Parent root = loader.load();
     // Assuming your VinylViewController has an initViewModel method.
     View.VinylViewController controller = loader.getController();
     controller.initViewModel(viewModel);
 
     primaryStage.setTitle("Vinyl Library");
     primaryStage.setScene(new Scene(root));
-
+    primaryStage.setResizable(true);
     primaryStage.show();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
 
     primaryStage.setOnCloseRequest(e -> {
       // Save the library when the window is closing.
@@ -84,7 +96,7 @@ public class Main extends Application {
     });
 
 
-    controller.initViewModel(viewModel);
+    //controller.initViewModel(viewModel);
   }
 
 

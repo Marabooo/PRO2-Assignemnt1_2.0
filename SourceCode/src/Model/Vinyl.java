@@ -24,6 +24,7 @@ public class Vinyl implements Serializable
 
   private transient PropertyChangeSupport pcs = new PropertyChangeSupport(this);
   // Made transient so it won't be serialized
+  private String state; //optional, descriptive text for UI purposes
 
   public Vinyl(String title, String artist, int releaseYear)
   {
@@ -35,6 +36,7 @@ public class Vinyl implements Serializable
     this.borrowedBy = null;
     this.isMarkedForRemoval = false;
     this.id = nextId++;
+    this.state = "Available";
   }
 
   public Vinyl() {
@@ -143,11 +145,10 @@ public class Vinyl implements Serializable
     pcs.firePropertyChange("borrowedBy", old, userId);
   }
 
-  // ----- Mara: These 4 methods can be all merged into one Ana already made:
   public void setState(VinylState newState){
-    VinylState oldState = currentState;
-    currentState = newState;
-    firePropertyChange("state", oldState, newState);
+   VinylState  oldState = this.currentState;
+    this.currentState = newState;
+    pcs.firePropertyChange("state", oldState, newState);
   }
 
   // The 4 methods merged:

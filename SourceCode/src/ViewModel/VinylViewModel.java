@@ -6,6 +6,7 @@ package ViewModel;
 import Model.*;
 import States.*;
 import Storage.XMLStorage;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import java.util.*;
@@ -18,10 +19,12 @@ public class VinylViewModel {
   private final ObservableList<Vinyl> vinyls = FXCollections.observableArrayList();
   private final VinylLibrary vinylLibrary;
   private final StringProperty selectedVinylTitle = new SimpleStringProperty();
+  private final StringProperty statusMessage = new SimpleStringProperty();
 
   public VinylViewModel(VinylLibrary library) {
     this.vinylLibrary = library;
     this.vinyls.addAll(library.getVinyls()); // add all vinyls from the library
+ addPropertyChangeListeners();
   }
 
   //Expose Vinyl List to the View / binding
@@ -34,9 +37,6 @@ public class VinylViewModel {
     return selectedVinylTitle;
   }
 
-  public void updateVinyls() {
-    vinyls.setAll(vinylLibrary.getVinyls()); // Updating the UI When the Model Changes
-  }
 
   public void addVinyl(String title, String artist, int releaseYear) {
     Vinyl newVinyl = new Vinyl(title, artist, releaseYear);
@@ -110,6 +110,32 @@ public void unreserveVinyl(Vinyl vinyl, User user) {
     saveData();
   }
 
+  public StringProperty statusMessageProperty() {
+    return statusMessage;
+  }
+
+  public void setStatusMessage(String message) {
+    Platform.runLater(() -> statusMessage.set(message));
+  }
+  private void addPropertyChangeListeners()
+  {
+    for (Vinyl vinyl : vinyls)
+    {
+      vinyl.addPropertyChangeListener(evt -> {
+        // Update an observable property with a description of the event.
+        String message =
+            "Vinyl " + vinyl.getTitle() + " changed: " + evt.getPropertyName()
+                + " from " + evt.getOldValue() + " to " + evt.getNewValue();
+        setStatusMessage(message);
+      });
+    }
+  }
+
+
+  public void updateVinyls() {
+    vinyls.setAll(vinylLibrary.getVinyls());
+    addPropertyChangeListeners();
+  }
 
   // Save the data to XML
   public void saveData() {

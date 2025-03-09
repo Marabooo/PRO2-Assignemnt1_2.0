@@ -34,11 +34,14 @@ public class VinylViewController
   @FXML private TableColumn<Vinyl, Integer> markedForRemovalColumn;
   private static final Logger logger = Logger.getLogger(
       VinylViewController.class.getName());
-
+  @FXML private Label statusLabel;
   private VinylViewModel viewModel;
+
   public void initViewModel(VinylViewModel viewModel) {
     this.viewModel = viewModel;
     vinylTable.setItems(viewModel.getVinyls());
+
+    statusLabel.textProperty().bind(viewModel.statusMessageProperty());
 
     titleColumn.setCellValueFactory(new PropertyValueFactory<>("title"));
     artistColumn.setCellValueFactory(new PropertyValueFactory<>("artist"));

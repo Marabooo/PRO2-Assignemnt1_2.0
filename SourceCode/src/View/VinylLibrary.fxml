@@ -3,9 +3,10 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
+<?import javafx.scene.control.Label?>
 
 <AnchorPane id="State" maxHeight="609.0" maxWidth="949.0" minHeight="442.0" minWidth="780.0" prefHeight="609.0" prefWidth="938.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.VinylViewController">
-
+    <Label fx:id="statusLabel" />
     <TableView fx:id="vinylTable" layoutX="142.0" layoutY="7.0" prefHeight="483.0" prefWidth="793.0" VBox.vgrow="ALWAYS">
         <columns>
             <TableColumn fx:id="titleColumn" prefWidth="127.20001220703125" text="Title" />
@@ -33,7 +34,6 @@
     <!-- New Buttons for Add User and Add Vinyl -->
     <Button fx:id="AddUserButton" layoutX="14.0" layoutY="437.0" onAction="#openAddUserWindow" prefHeight="40.0" prefWidth="110.0" text="Add User" />
     <Button fx:id="AddVinylButton" layoutX="14.0" layoutY="390.0" onAction="#openAddVinylWindow" prefHeight="40.0" prefWidth="110.0" text="Add Vinyl" />
-
     <TextArea fx:id="logTextArea" editable="false" layoutX="11.0" layoutY="495.0" prefHeight="106.0" prefWidth="917.0" />
     <Button fx:id="removeButton" layoutX="14.0" layoutY="342.0" mnemonicParsing="false" onAction="#removeVinyl" prefHeight="40.0" prefWidth="110.0" text="Remove" textAlignment="CENTER" />
 </AnchorPane>
