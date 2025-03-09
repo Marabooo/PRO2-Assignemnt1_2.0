@@ -27,6 +27,9 @@ public class VinylViewController {
   @FXML private TableColumn<Vinyl, String> artistColumn;
   @FXML private TableColumn<Vinyl, Integer> releaseYearColumn;
   @FXML private TableColumn<Vinyl, Integer> stateColumn;
+  @FXML private TableColumn<Vinyl, Integer> reservedByColumn;
+  @FXML private TableColumn<Vinyl, Integer> borrowedByColumn;
+  @FXML private TableColumn<Vinyl, Integer> markedForRemovalColumn;
 
   private VinylViewModel viewModel;
   public void initViewModel(VinylViewModel viewModel) {
@@ -37,13 +40,16 @@ public class VinylViewController {
     artistColumn.setCellValueFactory(new PropertyValueFactory<>("artist"));
     releaseYearColumn.setCellValueFactory(new PropertyValueFactory<>("releaseYear"));
     stateColumn.setCellValueFactory(new PropertyValueFactory<>("state"));
-
+    reservedByColumn.setCellValueFactory(new PropertyValueFactory<>("reservedBy"));
+    borrowedByColumn.setCellValueFactory(new PropertyValueFactory<>("borrowedBy"));
+    markedForRemovalColumn.setCellValueFactory(new PropertyValueFactory<>("markedForRemoval"));
   }
 
 
   private void updateUI() {
     Platform.runLater(() -> vinylTable.refresh());
   }
+
 
   //if we add these methods in the viewmodel, it is NOT good, the View directly modifies the Model
   // The UI should not interact directly with Vinyl.
@@ -119,7 +125,7 @@ public class VinylViewController {
     if (selected != null) {
       new Thread(() -> {
         viewModel.markForRemoval(selected);
-        updateUI();
+        Platform.runLater(this::updateUI); //method is called on the JavaFX Application Thread
       }).start();
     }
   }
@@ -130,7 +136,7 @@ public class VinylViewController {
     if (selected != null) {
       new Thread(() -> {
         viewModel.unmarkForRemoval(selected);
-        updateUI();
+        Platform.runLater(this::updateUI);
       }).start();
     }
   }

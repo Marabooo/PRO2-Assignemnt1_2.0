@@ -34,6 +34,8 @@ public class Main extends Application {
     primaryStage.show();
 
 
+    primaryStage.setResizable(false); // Prevent resizing
+    primaryStage.show();
 
     controller.initViewModel(viewModel);
 //    // Optionally add a close handler if you want to do additional processing.
