@@ -1,7 +1,7 @@
 <project>
   <modelVersion>4.0.0</modelVersion>
   <!-- Group ID: Use anything (e.g., your GitHub username) -->
-  <groupId>com.example</groupId>
+  <groupId>com.example.maraboo</groupId>
   <!-- Artifact ID: Your project name (match your GitHub repo) -->
   <artifactId>PRO2-Assignment1_2.0</artifactId>
   <version>1.0-SNAPSHOT</version>
