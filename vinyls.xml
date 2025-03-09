@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="21.0.4" class="java.beans.XMLDecoder">
+ <object class="java.util.ArrayList">
+  <void method="add">
+   <object class="Model.Vinyl">
+    <void property="artist">
+     <string>gggg</string>
+    </void>
+    <void property="borrowedBy">
+     <int>1</int>
+    </void>
+    <void property="id">
+     <int>1</int>
+    </void>
+    <void property="releaseYear">
+     <int>44444</int>
+    </void>
+    <void property="state">
+     <object class="States.BorrowedState"/>
+    </void>
+    <void property="title">
+     <string>ggg</string>
+    </void>
+   </object>
+  </void>
+ </object>
+</java>
