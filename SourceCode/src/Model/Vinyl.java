@@ -48,7 +48,6 @@ public class Vinyl implements Serializable
 
   public void borrow(Integer userId){
     currentState.borrow(this, userId);
-    this.borrowedBy = userId;
   }
 
 
