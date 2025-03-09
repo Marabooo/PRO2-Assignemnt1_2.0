@@ -12,7 +12,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
-
+import java.util.logging.Logger;
 
 public class VinylViewController {
 
@@ -23,6 +23,7 @@ public class VinylViewController {
   public Button returnButton;
   public Button unmarkforRemovalButton;
   @FXML private TableView<Vinyl> vinylTable;
+  @FXML private TextArea logTextArea;
   @FXML private TableColumn<Vinyl, String> titleColumn;
   @FXML private TableColumn<Vinyl, String> artistColumn;
   @FXML private TableColumn<Vinyl, Integer> releaseYearColumn;
@@ -30,6 +31,7 @@ public class VinylViewController {
   @FXML private TableColumn<Vinyl, Integer> reservedByColumn;
   @FXML private TableColumn<Vinyl, Integer> borrowedByColumn;
   @FXML private TableColumn<Vinyl, Integer> markedForRemovalColumn;
+  private static final Logger logger = Logger.getLogger(VinylViewController.class.getName());
 
   private VinylViewModel viewModel;
   public void initViewModel(VinylViewModel viewModel) {
@@ -74,6 +76,11 @@ public class VinylViewController {
     viewModel.markForRemoval(vinyl);
   }
 
+  private void log(String message) {
+    Platform.runLater(() -> logTextArea.appendText(message + "\n"));
+    logger.info(message);
+  }
+
   @FXML
   public void borrowVinyl() {
     Vinyl selected = vinylTable.getSelectionModel().getSelectedItem();
@@ -81,7 +88,8 @@ public class VinylViewController {
     if (selected != null) {
       new Thread(() -> {
         viewModel.borrowVinyl(selected, User.adminUser);
-        updateUI();
+        log("Borrowed vinyl: " + selected.getTitle());
+        Platform.runLater(this::updateUI);
       }).start();
     }
   }
@@ -92,7 +100,8 @@ public class VinylViewController {
     if (selected != null) {
       new Thread(() -> {
         viewModel.reserveVinyl(selected, User.adminUser);
-        updateUI();
+        log("Reserved vinyl: " + selected.getTitle());
+        Platform.runLater(this::updateUI);
       }).start();
     }
   }
@@ -103,7 +112,8 @@ public class VinylViewController {
     if (selected != null) {
       new Thread(() -> {
         viewModel.returnVinyl(selected);
-        updateUI();
+        log("Returned vinyl: " + selected.getTitle());
+        Platform.runLater(this::updateUI);
       }).start();
     }
   }
@@ -114,7 +124,8 @@ public class VinylViewController {
     if (selected != null) {
       new Thread(() -> {
         viewModel.unreserveVinyl(selected);
-        updateUI();
+        log("Unreserved vinyl: " + selected.getTitle());
+        Platform.runLater(this::updateUI);
       }).start();
     }
   }
@@ -125,6 +136,7 @@ public class VinylViewController {
     if (selected != null) {
       new Thread(() -> {
         viewModel.markForRemoval(selected);
+        log("Marked for removal: " + selected.getTitle());
         Platform.runLater(this::updateUI); //method is called on the JavaFX Application Thread
       }).start();
     }
@@ -136,6 +148,7 @@ public class VinylViewController {
     if (selected != null) {
       new Thread(() -> {
         viewModel.unmarkForRemoval(selected);
+        log("Unmarked for removal: " + selected.getTitle());
         Platform.runLater(this::updateUI);
       }).start();
     }

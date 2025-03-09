@@ -5,7 +5,7 @@
 
 <AnchorPane id="State" maxHeight="442.0" maxWidth="941.0" minHeight="442.0" minWidth="780.0" prefHeight="442.0" prefWidth="941.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.VinylViewController">
 
-    <TableView fx:id="vinylTable" layoutX="137.0" layoutY="14.0" prefHeight="414.0" prefWidth="792.0">
+    <TableView fx:id="vinylTable" VBox.vgrow="ALWAYS" layoutX="137.0" layoutY="14.0" prefHeight="414.0" prefWidth="792.0">
         <columns>
             <TableColumn fx:id="titleColumn" prefWidth="127.20001220703125" text="Title" />
             <TableColumn fx:id="artistColumn" prefWidth="127.20001220703125" text="Artist" />
@@ -28,4 +28,6 @@
     <!-- New Buttons for Add User and Add Vinyl -->
     <Button fx:id="AddUserButton" layoutX="14.0" layoutY="333.0" onAction="#openAddUserWindow" prefHeight="40.0" prefWidth="110.0" text="Add User" />
     <Button fx:id="AddVinylButton" layoutX="14.0" layoutY="380.0" onAction="#openAddVinylWindow" prefHeight="40.0" prefWidth="110.0" text="Add Vinyl" />
+
+    <TextArea fx:id="logTextArea" layoutX="14.0" layoutY="430.0" prefHeight="100.0" prefWidth="915.0" editable="false" />
 </AnchorPane>
