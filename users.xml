@@ -111,5 +111,15 @@
     </void>
    </object>
   </void>
+  <void method="add">
+   <object class="Model.User">
+    <void property="id">
+     <int>12</int>
+    </void>
+    <void property="name">
+     <string>HeIsBald</string>
+    </void>
+   </object>
+  </void>
  </object>
 </java>

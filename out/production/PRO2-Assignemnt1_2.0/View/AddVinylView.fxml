@@ -12,5 +12,3 @@
     <Label fx:id="statusLabel" />
 </VBox>
 
-
-<!--<Button onAction="#addVinyl"-->

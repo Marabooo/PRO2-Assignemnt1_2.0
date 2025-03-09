@@ -7,5 +7,5 @@
     <Label fx:id="statusLabel" style="-fx-font-size: 18px;" text="Add New User" />
     <TextField fx:id="usernameField" prefHeight="26.0" prefWidth="239.0" promptText="Enter username" />
     <Button fx:id="addUserButton" onAction="#addUser" text="Add User" />
-<!--    <Label fx:id="statusLabel"/>-->
+
 </VBox>
