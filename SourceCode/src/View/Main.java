@@ -9,17 +9,34 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Main extends Application {
   @Override
   public void start(Stage primaryStage) throws Exception
   {
-    // Create your VinylLibrary (repository)
-    VinylLibrary library = new VinylLibrary();
+    // Created VinylLibrary (repository) and xmlStorage lists
+    List<Vinyl> loadedVinyls = XMLStorage.loadVinylsFromXML("vinyls.xml");
+    List<User> loadedUsers = XMLStorage.loadUsersFromXML("users.xml");
 
-    // Create your ViewModel with the library
+    // If no data was loaded, use empty lists.
+    if (loadedVinyls == null) {
+      loadedVinyls = new ArrayList<>();
+    }
+    if (loadedUsers == null) {
+      loadedUsers = new ArrayList<>();
+    }
+
+    // Create the library with persisted data.
+    VinylLibrary library = new VinylLibrary(loadedUsers, loadedVinyls);
+    XMLStorage.saveVinylsToXML("vinyls.xml", library.getVinylList());
+    XMLStorage.saveUsersToXML("users.xml", library.getUsers());
+
+
+    // Created ViewModel with the library
     VinylViewModel viewModel = new VinylViewModel(library);
+
 
     // Load your main view and set its view model via the controller
     FXMLLoader loader = new FXMLLoader(
@@ -34,20 +51,22 @@ public class Main extends Application {
 
     primaryStage.show();
 
+    primaryStage.setOnCloseRequest(e -> {
+      // Save the library when the window is closing.
+      XMLStorage.saveVinylsToXML("vinyls.xml", library.getVinylList());
+      XMLStorage.saveUsersToXML("users.xml", library.getUsers());
+    });
 
 
     controller.initViewModel(viewModel);
-//    // Optionally add a close handler if you want to do additional processing.
-//    primaryStage.setOnCloseRequest(e -> {
-//      // Save data when the window closes.
-//      viewModel.saveData();
-//    });
   }
 
 
   public static void main(String[] args) {
     launch(args);
   }
+
+
 }
 
 

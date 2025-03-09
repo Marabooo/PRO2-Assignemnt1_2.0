@@ -14,23 +14,23 @@ public class TestXMLStorage {
     Vinyl.resetCounter();
 
     // Create a new VinylLibrary instance and clear its data.
-    VinylLibrary library = new VinylLibrary();
-    library.clear(); // Ensure this method clears both vinyls and users.
+    VinylLibrary testLibrary = new VinylLibrary();
+    testLibrary.clear(); // Ensure this method clears both vinyls and users.
 
     // Add test Vinyl objects to the library.
-    library.addVinyl(new Vinyl("Album One", "Artist One", 1999));
-    library.addVinyl(new Vinyl("Album Two", "Artist Two", 2005));
-    library.addVinyl(new Vinyl("Greatest Album That Ever Was", "A guy with a guitar", 2020));
+    testLibrary.addVinyl(new Vinyl("Album One", "Artist One", 1999));
+    testLibrary.addVinyl(new Vinyl("Album Two", "Artist Two", 2005));
+    testLibrary.addVinyl(new Vinyl("Greatest Album That Ever Was", "A guy with a guitar", 2020));
 
     // Add test User objects to the library.
-    library.addUser(new User("Alice"));
-    library.addUser(new User("Bob"));
-    library.addUser(new User("Bugs Bunny"));
+    testLibrary.addUser(new User("Alice"));
+    testLibrary.addUser(new User("Bob"));
+    testLibrary.addUser(new User("Bugs Bunny"));
 
     // Save the library data to XML files.
     // Using getVinylList() which returns the internal list.
-    XMLStorage.saveVinylsToXML("test_vinyls.xml", library.getVinylList());
-    XMLStorage.saveUsersToXML("test_users.xml", library.getUsers());
+    XMLStorage.saveVinylsToXML("test_vinyls.xml", testLibrary.getVinylList());
+    XMLStorage.saveUsersToXML("test_users.xml", testLibrary.getUsers());
 
     // Load the data back from the XML files.
     List<Vinyl> loadedVinyls = XMLStorage.loadVinylsFromXML("test_vinyls.xml");

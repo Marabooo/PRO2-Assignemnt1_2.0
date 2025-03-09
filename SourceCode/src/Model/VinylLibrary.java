@@ -16,6 +16,11 @@ public class VinylLibrary implements Serializable
     this.users = new ArrayList<User>();
     this.vinyls = new ArrayList<Vinyl>();
   }
+  public VinylLibrary (List<User> users, List<Vinyl> vinyls)
+  {
+    this.users = users;
+    this.vinyls = vinyls;
+  }
 
   public List<Vinyl> getVinyls() {
     return new ArrayList<>(vinyls); // Return a copy to avoid modification issues

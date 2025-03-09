@@ -8,6 +8,7 @@ public class AvailableAndReservedState implements VinylState {
     // Only the reserver can borrow
     if (userId == vinyl.getReservedBy()){
       vinyl.setBorrowedBy(userId);
+      vinyl.unreserve();
       vinyl.setState(new BorrowedState());
     }
   }
