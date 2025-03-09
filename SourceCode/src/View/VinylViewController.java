@@ -14,7 +14,8 @@ import javafx.stage.Stage;
 
 import java.util.logging.Logger;
 
-public class VinylViewController {
+public class VinylViewController
+{
 
   public Button markForRemovalButton;
   public Button unreserveButton;
@@ -31,7 +32,8 @@ public class VinylViewController {
   @FXML private TableColumn<Vinyl, Integer> reservedByColumn;
   @FXML private TableColumn<Vinyl, Integer> borrowedByColumn;
   @FXML private TableColumn<Vinyl, Integer> markedForRemovalColumn;
-  private static final Logger logger = Logger.getLogger(VinylViewController.class.getName());
+  private static final Logger logger = Logger.getLogger(
+      VinylViewController.class.getName());
 
   private VinylViewModel viewModel;
   public void initViewModel(VinylViewModel viewModel) {
@@ -42,9 +44,12 @@ public class VinylViewController {
     artistColumn.setCellValueFactory(new PropertyValueFactory<>("artist"));
     releaseYearColumn.setCellValueFactory(new PropertyValueFactory<>("releaseYear"));
     stateColumn.setCellValueFactory(new PropertyValueFactory<>("state"));
-    reservedByColumn.setCellValueFactory(new PropertyValueFactory<>("reservedBy"));
-    borrowedByColumn.setCellValueFactory(new PropertyValueFactory<>("borrowedBy"));
-    markedForRemovalColumn.setCellValueFactory(new PropertyValueFactory<>("markedForRemoval"));
+    reservedByColumn.setCellValueFactory(
+        new PropertyValueFactory<>("reservedBy"));
+    borrowedByColumn.setCellValueFactory(
+        new PropertyValueFactory<>("borrowedBy"));
+    markedForRemovalColumn.setCellValueFactory(
+        new PropertyValueFactory<>("markedForRemoval"));
   }
 
 
@@ -60,104 +65,117 @@ public class VinylViewController {
     viewModel.borrowVinyl(vinyl, user);
   }
 
-  public void onReserveButtonPressed(Vinyl vinyl) {
+  public void onReserveButtonPressed(Vinyl vinyl)
+  {
     viewModel.reserveVinyl(vinyl, User.adminUser);
   }
 
-  public void onReturnButtonPressed(Vinyl vinyl) {
+  public void onReturnButtonPressed(Vinyl vinyl)
+  {
     viewModel.returnVinyl(vinyl);
   }
 
-  public void onUnreserveButtonPressed(Vinyl vinyl) {
-    viewModel.unreserveVinyl(vinyl);
+  public void onUnreserveButtonPressed(Vinyl vinyl, User user) {
+    viewModel.unreserveVinyl(vinyl, user);
   }
 
-  public void onMarkForRemovalButtonPressed(Vinyl vinyl) {
+  public void onMarkForRemovalButtonPressed(Vinyl vinyl)
+  {
     viewModel.markForRemoval(vinyl);
   }
 
-  private void log(String message) {
+  private void log(String message)
+  {
     Platform.runLater(() -> logTextArea.appendText(message + "\n"));
     logger.info(message);
   }
 
-  @FXML
-  public void borrowVinyl() {
+  @FXML public void borrowVinyl()
+  {
     Vinyl selected = vinylTable.getSelectionModel().getSelectedItem();
 
-    if (selected != null) {
+    if (selected != null)
+    {
       new Thread(() -> {
         viewModel.borrowVinyl(selected, User.adminUser);
-        log("Borrowed vinyl: " + selected.getTitle());
+        log( "Vinyl: " +  selected.getTitle() + " Borrowed by: " + User.adminUser.getName());
         Platform.runLater(this::updateUI);
       }).start();
     }
   }
 
-  @FXML
-  public void reserveVinyl() {
+  @FXML public void reserveVinyl()
+  {
     Vinyl selected = vinylTable.getSelectionModel().getSelectedItem();
-    if (selected != null) {
+    if (selected != null)
+    {
       new Thread(() -> {
         viewModel.reserveVinyl(selected, User.adminUser);
-        log("Reserved vinyl: " + selected.getTitle());
+        log( "Vinyl: " +  selected.getTitle() + " Reserved by: " + User.adminUser.getName());
         Platform.runLater(this::updateUI);
       }).start();
     }
   }
 
-  @FXML
-  public void returnVinyl() {
+  @FXML public void returnVinyl()
+  {
     Vinyl selected = vinylTable.getSelectionModel().getSelectedItem();
-    if (selected != null) {
+    if (selected != null)
+    {
       new Thread(() -> {
         viewModel.returnVinyl(selected);
-        log("Returned vinyl: " + selected.getTitle());
+        log( "Vinyl: " +  selected.getTitle() + " Returned by: " + User.adminUser.getName());
         Platform.runLater(this::updateUI);
       }).start();
     }
   }
 
-  @FXML
-  public void unreserveVinyl() {
+  @FXML public void unreserveVinyl()
+  {
     Vinyl selected = vinylTable.getSelectionModel().getSelectedItem();
-    if (selected != null) {
+    if (selected != null)
+    {
       new Thread(() -> {
-        viewModel.unreserveVinyl(selected);
+        viewModel.unreserveVinyl(selected, User.adminUser);
         log("Unreserved vinyl: " + selected.getTitle());
         Platform.runLater(this::updateUI);
       }).start();
     }
   }
 
-  @FXML
-  public void markForRemoval() {
+  @FXML public void markForRemoval()
+  {
     Vinyl selected = vinylTable.getSelectionModel().getSelectedItem();
-    if (selected != null) {
+    if (selected != null)
+    {
       new Thread(() -> {
         viewModel.markForRemoval(selected);
-        log("Marked for removal: " + selected.getTitle());
-        Platform.runLater(this::updateUI); //method is called on the JavaFX Application Thread
+        log( "Vinyl: " +  selected.getTitle() + " Marked for removal by: " + User.adminUser.getName());
+        Platform.runLater(
+            this::updateUI); //method is called on the JavaFX Application Thread
       }).start();
     }
   }
 
-  @FXML
-  public void unmarkForRemoval() {
+  @FXML public void unmarkForRemoval()
+  {
     Vinyl selected = vinylTable.getSelectionModel().getSelectedItem();
-    if (selected != null) {
+    if (selected != null)
+    {
       new Thread(() -> {
         viewModel.unmarkForRemoval(selected);
-        log("Unmarked for removal: " + selected.getTitle());
+        log( "Vinyl: " +  selected.getTitle() + " Unmarked for removal: by: " + User.adminUser.getName());
         Platform.runLater(this::updateUI);
       }).start();
     }
   }
 
-  @FXML
-  public void openAddUserWindow() {
-    try {
-      FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/AddUserView.fxml"));
+  @FXML public void openAddUserWindow()
+  {
+    try
+    {
+      FXMLLoader loader = new FXMLLoader(
+          getClass().getResource("/View/AddUserView.fxml"));
       Parent root = loader.load();
       AddUserController controller = loader.getController();
       controller.initViewModel(viewModel);
@@ -166,15 +184,36 @@ public class VinylViewController {
       stage.setTitle("Add User");
       stage.setScene(new Scene(root));
       stage.show();
-    } catch (Exception e) {
+    }
+    catch (Exception e)
+    {
       e.printStackTrace();
     }
   }
 
-  @FXML
-  public void openAddVinylWindow() {
-    try {
-      FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/AddVinylView.fxml"));
+  @FXML public void removeVinyl()
+  {
+    Vinyl selected = vinylTable.getSelectionModel().getSelectedItem();
+    if (selected != null)
+    {
+      new Thread(() -> {
+        viewModel.removeVinyl(selected);
+        log( "Vinyl: " +  selected.getTitle() + " Removed by: " + User.adminUser.getName());
+        Platform.runLater(() -> {
+          vinylTable.getItems()
+              .remove(selected); // Remove the item from the TableView
+          updateUI(); // Refresh the TableView
+        });
+      }).start();
+    }
+  }
+
+  @FXML public void openAddVinylWindow()
+  {
+    try
+    {
+      FXMLLoader loader = new FXMLLoader(
+          getClass().getResource("/View/AddVinylView.fxml"));
       Parent root = loader.load();
       AddVinylController controller = loader.getController();
       controller.initViewModel(viewModel);
@@ -183,10 +222,15 @@ public class VinylViewController {
       stage.setTitle("Add Vinyl");
       stage.setScene(new Scene(root));
       stage.show();
-    } catch (Exception e) {
+    }
+    catch (Exception e)
+    {
       e.printStackTrace();
     }
   }
 }
+
+
+
 
 

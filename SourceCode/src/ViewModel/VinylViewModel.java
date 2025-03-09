@@ -43,21 +43,24 @@ public class VinylViewModel {
     Vinyl newVinyl = new Vinyl(title, artist, releaseYear);
     vinylLibrary.addVinyl(newVinyl);
     updateVinyls();
+    saveData();
   }
   public void addUser(String username) {
     User newUser = new User(username);
     vinylLibrary.addUser(newUser);
     updateVinyls();
+    saveData();
   }
   public int getUserId()
   {
     return 0;
   }
 
-public void unreserveVinyl(Vinyl vinyl) {
+public void unreserveVinyl(Vinyl vinyl, User user) {
     if (vinyl != null) {
-      vinyl.unreserve();
+      vinyl.unreserve(user.getId());
       updateVinyls();
+      saveData();
     }
   }
    public void unmarkForRemoval(Vinyl vinyl)
@@ -66,6 +69,7 @@ public void unreserveVinyl(Vinyl vinyl) {
       {
         vinyl.unmarkForRemoval();
         updateVinyls();
+        saveData();
       }
    }
 
@@ -75,6 +79,7 @@ public void unreserveVinyl(Vinyl vinyl) {
       vinyl.borrow(user.getId()
       );
       updateVinyls();
+      saveData();
     }
   }
 
@@ -82,20 +87,29 @@ public void unreserveVinyl(Vinyl vinyl) {
     if (vinyl != null) {
       vinyl.reserve(user.getId());
       updateVinyls();
+      saveData();
     }
   }
   public void returnVinyl(Vinyl vinyl) {
     if (vinyl != null) {
-      vinyl.returnVinyl();
+      vinyl.returnVinyl(vinyl.getBorrowedBy());
       updateVinyls();
+      saveData();
     }
   }
   public void markForRemoval(Vinyl vinyl) {
     if (vinyl != null) {
       vinyl.markForRemoval();
       updateVinyls();
+      saveData();
     }
   }
+
+  public void removeVinyl(Vinyl vinyl) {
+    vinylLibrary.removeVinyl(vinyl);
+    saveData();
+  }
+
 
   // Save the data to XML
   public void saveData() {

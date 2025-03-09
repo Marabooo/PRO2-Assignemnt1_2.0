@@ -52,10 +52,9 @@ public class Vinyl implements Serializable
   }
 
 
-  public void returnVinyl(){
-    if(borrowedBy == null){
-      System.out.println("Error: Cannot return vinyl because borrowedBy is null");
-      return; //exit method, do it because running main it shows mistake
+  public void returnVinyl(Integer userId){
+    if(borrowedBy == null || borrowedBy != userId){
+      throw new IllegalStateException("Cannot return vinyl. It is not borrowed by this user.");
     }
     currentState.returnVinyl(this, borrowedBy);
   }
@@ -63,8 +62,8 @@ public class Vinyl implements Serializable
   public void reserve(Integer userId){
     currentState.reserve(this, userId);
   }
-  public void unreserve(){
-    currentState.unreserve(this);
+  public void unreserve(Integer userId){
+    currentState.unreserve(this, userId);
   }
 
     //
