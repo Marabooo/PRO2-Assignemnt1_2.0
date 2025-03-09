@@ -1,13 +1,11 @@
 <project>
   <modelVersion>4.0.0</modelVersion>
-  <!-- Group ID: Use anything (e.g., your GitHub username) -->
   <groupId>com.example.maraboo</groupId>
-  <!-- Artifact ID: Your project name (match your GitHub repo) -->
   <artifactId>PRO2-Assignment1_2.0</artifactId>
   <version>1.0-SNAPSHOT</version>
 
   <dependencies>
-    <!-- JavaFX Dependencies (Add only what you need) -->
+    <!-- JavaFX dependencies (unchanged) -->
     <dependency>
       <groupId>org.openjfx</groupId>
       <artifactId>javafx-controls</artifactId>
@@ -18,22 +16,40 @@
       <artifactId>javafx-fxml</artifactId>
       <version>20.0.2</version>
     </dependency>
-    <!-- Add more JavaFX modules if needed (e.g., javafx-graphics, javafx-media) -->
   </dependencies>
 
-<build>
-    <sourceDirectory>src</sourceDirectory>
+  <build>
+    <!-- Remove <sourceDirectory> and use build-helper instead -->
     <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>build-helper-maven-plugin</artifactId>
+        <version>3.3.0</version>
+        <executions>
+          <execution>
+            <id>add-source</id>
+            <phase>generate-sources</phase>
+            <goals>
+              <goal>add-source</goal>
+            </goals>
+            <configuration>
+              <sources>
+                <!-- Add ALL your custom source folders here -->
+                <source>${project.basedir}/SourceCode/src</source>
+              </sources>
+            </configuration>
+          </execution>
+        </executions>
+      </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
         <version>3.11.0</version>
         <configuration>
-          <source>20</source> <!-- Match your JDK version -->
+          <source>20</source>
           <target>20</target>
         </configuration>
       </plugin>
     </plugins>
   </build>
-
 </project>
