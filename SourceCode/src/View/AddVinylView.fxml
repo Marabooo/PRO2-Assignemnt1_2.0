@@ -8,6 +8,9 @@
     <TextField fx:id="titleField" promptText="Enter title" />
     <TextField fx:id="artistField" promptText="Enter artist" />
     <TextField fx:id="releaseYearField" promptText="Enter release year" />
-    <Button onAction="#addVinyl" text="Add Vinyl" />
+    <Button fx:id="addVinylButton" onAction="#addVinyl" text="Add Vinyl" />
     <Label fx:id="statusLabel" />
 </VBox>
+
+
+<!--<Button onAction="#addVinyl"-->

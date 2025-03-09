@@ -25,14 +25,14 @@
 
     <!-- VBox for Buttons on the Left -->
     <VBox spacing="10" AnchorPane.topAnchor="10.0" AnchorPane.leftAnchor="10.0">
-        <Button fx:id="BorrowButton" text="Borrow" onAction="#borrowVinyl" prefWidth="110.0" />
-        <Button fx:id="ReturnButton" text="Return" onAction="#returnVinyl" prefWidth="110.0" />
-        <Button fx:id="ReserveButton" text="Reserve" onAction="#reserveVinyl" prefWidth="110.0" />
-        <Button fx:id="UnreserveButton" text="Unreserve" onAction="#unreserveVinyl" prefWidth="110.0" />
-        <Button fx:id="MarkforRemovalButton" text="Mark for Removal" onAction="#markForRemoval" prefWidth="110.0" />
-        <Button fx:id="UnmarkforRemovalButton" text="Unmark for Removal" onAction="#unmarkForRemoval" prefWidth="110.0" />
+        <Button fx:id="borrowButton" text="Borrow" onAction="#borrowVinyl" prefWidth="110.0" />
+        <Button fx:id="returnButton" text="Return" onAction="#returnVinyl" prefWidth="110.0" />
+        <Button fx:id="reserveButton" text="Reserve" onAction="#reserveVinyl" prefWidth="110.0" />
+        <Button fx:id="unreserveButton" text="Unreserve" onAction="#unreserveVinyl" prefWidth="110.0" />
+        <Button fx:id="markForRemovalButton" text="Mark for Removal" onAction="#markForRemoval" prefWidth="110.0" />
+        <Button fx:id="unmarkForRemovalButton" text="Unmark for Removal" onAction="#unmarkForRemoval" prefWidth="110.0" />
         <Button fx:id="removeButton" text="Remove" onAction="#removeVinyl" prefWidth="110.0" />
-        <Button fx:id="AddVinylButton" text="Add Vinyl" onAction="#openAddVinylWindow" prefWidth="110.0" />
+        <Button fx:id="addVinylButton" text="Add Vinyl" onAction="#openAddVinylWindow" prefWidth="110.0" />
         <Button fx:id="AddUserButton" text="Add User" onAction="#openAddUserWindow" prefWidth="110.0" />
     </VBox>
 
@@ -48,48 +48,3 @@
 
 
 
-<!--        <?xml version="1.0" encoding="UTF-8"?>-->
-
-<!--        <?import javafx.scene.control.*?>-->
-<!--        <?import javafx.scene.layout.*?>-->
-<!--        <?import javafx.scene.text.*?>-->
-<!--        <?import javafx.scene.control.Label?>-->
-
-<!--<AnchorPane id="State" maxHeight="609.0" maxWidth="949.0" minHeight="442.0" minWidth="780.0" prefHeight="609.0" prefWidth="938.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.VinylViewController">-->
-<!--<VBox>-->
-<!--    <Label fx:id="statusLabel" layoutX="10.0" layoutY="10.0" prefWidth="500.0" text="Vinyl status updates will appear here." />-->
-<!--    <TableView fx:id="vinylTable" layoutX="142.0" layoutY="7.0" prefHeight="483.0" prefWidth="793.0" VBox.vgrow="ALWAYS">-->
-<!--        <columns>-->
-<!--            <TableColumn fx:id="titleColumn" prefWidth="127.20001220703125" text="Title" />-->
-<!--            <TableColumn fx:id="artistColumn" prefWidth="127.20001220703125" text="Artist" />-->
-<!--            <TableColumn fx:id="releaseYearColumn" prefWidth="82.0" text="Release Year" />-->
-<!--            <TableColumn fx:id="stateColumn" prefWidth="163.60000610351562" text="State" />-->
-<!--            <TableColumn fx:id="reservedByColumn" prefWidth="78.4000244140625" text="Reserved By" />-->
-<!--            <TableColumn fx:id="borrowedByColumn" prefWidth="83.00006103515625" text="Borrowed By" />-->
-<!--            <TableColumn fx:id="markedForRemovalColumn" prefWidth="127.199951171875" text="Marked for removal" />-->
-<!--        </columns>-->
-<!--    </TableView>-->
-<!--</VBox>-->
-
-<!--<HBox spacing="10" />-->
-
-<!--<Button fx:id="MarkforRemovalButton" layoutX="14.0" layoutY="241.0" mnemonicParsing="false" onAction="#markForRemoval" prefHeight="40.0" prefWidth="110.0" text="Mark for Removal" />-->
-<!--<Button fx:id="UnreserveButton" layoutX="14.0" layoutY="193.0" mnemonicParsing="false" onAction="#unreserveVinyl" prefHeight="40.0" prefWidth="110.0" text="Unreserved" />-->
-<!--<Button fx:id="BorrowButton" layoutX="14.0" layoutY="46.0" onAction="#borrowVinyl" prefHeight="40.0" prefWidth="110.0" text="Borrow" />-->
-<!--<Button fx:id="ReserveButton" layoutX="14.0" layoutY="142.0" onAction="#reserveVinyl" prefHeight="40.0" prefWidth="110.0" text="Reserve" />-->
-<!--<Button fx:id="ReturnButton" layoutX="14.0" layoutY="94.0" onAction="#returnVinyl" prefHeight="40.0" prefWidth="110.0" text="Return" />-->
-<!--<Button fx:id="UnmarkforRemovalButton" ellipsisString=" " layoutX="14.0" layoutY="291.0" mnemonicParsing="false" onAction="#unmarkForRemoval" prefHeight="40.0" prefWidth="110.0" text="Unmark for Removal" textAlignment="JUSTIFY" wrapText="true">-->
-
-<!--    <font>-->
-<!--        <Font size="10.0" />-->
-<!--    </font></Button>-->
-
-<!--&lt;!&ndash; New Buttons for Add User and Add Vinyl &ndash;&gt;-->
-<!--<Button fx:id="AddUserButton" layoutX="14.0" layoutY="437.0" onAction="#openAddUserWindow" prefHeight="40.0" prefWidth="110.0" text="Add User" />-->
-<!--<Button fx:id="AddVinylButton" layoutX="14.0" layoutY="390.0" onAction="#openAddVinylWindow" prefHeight="40.0" prefWidth="110.0" text="Add Vinyl" />-->
-<!--<Button fx:id="removeButton" layoutX="14.0" layoutY="342.0" mnemonicParsing="false" onAction="#removeVinyl" prefHeight="40.0" prefWidth="110.0" text="Remove" textAlignment="CENTER" />-->
-<!--<TextArea fx:id="logTextArea" editable="false" layoutX="11.0" layoutY="495.0" prefHeight="106.0" prefWidth="917.0" />-->
-
-
-
-<!--</AnchorPane>-->

@@ -25,14 +25,14 @@
 
     <!-- VBox for Buttons on the Left -->
     <VBox spacing="10" AnchorPane.topAnchor="10.0" AnchorPane.leftAnchor="10.0">
-        <Button fx:id="BorrowButton" text="Borrow" onAction="#borrowVinyl" prefWidth="110.0" />
-        <Button fx:id="ReturnButton" text="Return" onAction="#returnVinyl" prefWidth="110.0" />
-        <Button fx:id="ReserveButton" text="Reserve" onAction="#reserveVinyl" prefWidth="110.0" />
-        <Button fx:id="UnreserveButton" text="Unreserve" onAction="#unreserveVinyl" prefWidth="110.0" />
-        <Button fx:id="MarkforRemovalButton" text="Mark for Removal" onAction="#markForRemoval" prefWidth="110.0" />
-        <Button fx:id="UnmarkforRemovalButton" text="Unmark for Removal" onAction="#unmarkForRemoval" prefWidth="110.0" />
+        <Button fx:id="borrowButton" text="Borrow" onAction="#borrowVinyl" prefWidth="110.0" />
+        <Button fx:id="returnButton" text="Return" onAction="#returnVinyl" prefWidth="110.0" />
+        <Button fx:id="reserveButton" text="Reserve" onAction="#reserveVinyl" prefWidth="110.0" />
+        <Button fx:id="unreserveButton" text="Unreserve" onAction="#unreserveVinyl" prefWidth="110.0" />
+        <Button fx:id="markForRemovalButton" text="Mark for Removal" onAction="#markForRemoval" prefWidth="110.0" />
+        <Button fx:id="unmarkForRemovalButton" text="Unmark for Removal" onAction="#unmarkForRemoval" prefWidth="110.0" />
         <Button fx:id="removeButton" text="Remove" onAction="#removeVinyl" prefWidth="110.0" />
-        <Button fx:id="AddVinylButton" text="Add Vinyl" onAction="#openAddVinylWindow" prefWidth="110.0" />
+        <Button fx:id="addVinylButton" text="Add Vinyl" onAction="#openAddVinylWindow" prefWidth="110.0" />
         <Button fx:id="AddUserButton" text="Add User" onAction="#openAddUserWindow" prefWidth="110.0" />
     </VBox>
 

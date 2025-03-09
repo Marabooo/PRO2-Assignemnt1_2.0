@@ -22,7 +22,9 @@ public class VinylViewController
   public Button borrowButton;
   public Button reserveButton;
   public Button returnButton;
-  public Button unmarkforRemovalButton;
+  public Button unmarkForRemovalButton;
+  public Button addVinylButton;
+  public Button addUserButton;
   @FXML private TableView<Vinyl> vinylTable;
   @FXML private TextArea logTextArea;
   @FXML private TableColumn<Vinyl, String> titleColumn;

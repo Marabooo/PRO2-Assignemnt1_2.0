@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="21.0.4" class="java.beans.XMLDecoder">
+ <object class="java.util.ArrayList">
+  <void method="add">
+   <object class="Model.User">
+    <void property="id">
+     <int>1</int>
+    </void>
+    <void property="name">
+     <string>Bibaboba</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="Model.User">
+    <void property="id">
+     <int>2</int>
+    </void>
+    <void property="name">
+     <string>BobaBiba</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="Model.User">
+    <void property="id">
+     <int>3</int>
+    </void>
+    <void property="name">
+     <string>SinhunPo</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="Model.User">
+    <void property="id">
+     <int>4</int>
+    </void>
+    <void property="name">
+     <string>UlikeMeorNah</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="Model.User">
+    <void property="id">
+     <int>5</int>
+    </void>
+    <void property="name">
+     <string>Lukasmukas</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="Model.User">
+    <void property="id">
+     <int>6</int>
+    </void>
+    <void property="name">
+     <string>Craymay</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="Model.User">
+    <void property="id">
+     <int>7</int>
+    </void>
+    <void property="name">
+     <string>PepaPig</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="Model.User">
+    <void property="id">
+     <int>8</int>
+    </void>
+    <void property="name">
+     <string>SlayurassClap</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="Model.User">
+    <void property="id">
+     <int>9</int>
+    </void>
+    <void property="name">
+     <string>Glay</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="Model.User">
+    <void property="id">
+     <int>10</int>
+    </void>
+    <void property="name">
+     <string>NoIDont</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="Model.User">
+    <void property="id">
+     <int>11</int>
+    </void>
+    <void property="name">
+     <string>OldFart</string>
+    </void>
+   </object>
+  </void>
+ </object>
+</java>

@@ -6,6 +6,6 @@
 <VBox alignment="CENTER" prefHeight="200.0" prefWidth="300.0" spacing="10" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="View.AddUserController">
     <Label fx:id="statusLabel" style="-fx-font-size: 18px;" text="Add New User" />
     <TextField fx:id="usernameField" prefHeight="26.0" prefWidth="239.0" promptText="Enter username" />
-    <Button onAction="#addUser" text="Add User" />
-    <Label fx:id="statusLabel"/>
+    <Button fx:id="addUserButton" onAction="#addUser" text="Add User" />
+<!--    <Label fx:id="statusLabel"/>-->
 </VBox>

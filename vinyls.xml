@@ -4,22 +4,166 @@
   <void method="add">
    <object class="Model.Vinyl">
     <void property="artist">
-     <string>gggg</string>
+     <string>Merlin Manson</string>
+    </void>
+    <void property="borrowedBy">
+     <int>8</int>
+    </void>
+    <void property="id">
+     <int>2</int>
+    </void>
+    <void property="releaseYear">
+     <int>1999</int>
+    </void>
+    <void property="reservedBy">
+     <int>6</int>
+    </void>
+    <void property="state">
+     <object class="States.BorrowedAndReservedState"/>
+    </void>
+    <void property="title">
+     <string>Slay</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="Model.Vinyl">
+    <void property="artist">
+     <string>Perry</string>
+    </void>
+    <void property="id">
+     <int>3</int>
+    </void>
+    <void property="releaseYear">
+     <int>2010</int>
+    </void>
+    <void property="reservedBy">
+     <int>5</int>
+    </void>
+    <void property="state">
+     <object class="States.AvailableAndReservedState"/>
+    </void>
+    <void property="title">
+     <string>Katy</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="Model.Vinyl">
+    <void property="artist">
+     <string>OldMan</string>
     </void>
     <void property="borrowedBy">
      <int>1</int>
     </void>
     <void property="id">
-     <int>1</int>
+     <int>4</int>
     </void>
     <void property="releaseYear">
-     <int>44444</int>
+     <int>1234</int>
+    </void>
+    <void property="reservedBy">
+     <int>1</int>
     </void>
     <void property="state">
-     <object class="States.BorrowedState"/>
+     <object class="States.BorrowedAndReservedState"/>
     </void>
     <void property="title">
-     <string>ggg</string>
+     <string>Garry</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="Model.Vinyl">
+    <void property="artist">
+     <string>UrrrrrHead</string>
+    </void>
+    <void property="borrowedBy">
+     <int>4</int>
+    </void>
+    <void property="id">
+     <int>5</int>
+    </void>
+    <void property="releaseYear">
+     <int>1998</int>
+    </void>
+    <void property="reservedBy">
+     <int>1</int>
+    </void>
+    <void property="state">
+     <object class="States.BorrowedAndReservedState"/>
+    </void>
+    <void property="title">
+     <string>Metal</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="Model.Vinyl">
+    <void property="artist">
+     <string>TheFleetFoot</string>
+    </void>
+    <void property="id">
+     <int>7</int>
+    </void>
+    <void property="releaseYear">
+     <int>1987</int>
+    </void>
+    <void property="reservedBy">
+     <int>9</int>
+    </void>
+    <void property="state">
+     <object class="States.AvailableAndReservedState"/>
+    </void>
+    <void property="title">
+     <string>Thechain</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="Model.Vinyl">
+    <void property="artist">
+     <string>Gey</string>
+    </void>
+    <void property="id">
+     <int>8</int>
+    </void>
+    <void property="releaseYear">
+     <int>1970</int>
+    </void>
+    <void property="reservedBy">
+     <int>2</int>
+    </void>
+    <void property="state">
+     <object class="States.AvailableAndReservedState"/>
+    </void>
+    <void property="title">
+     <string>Father</string>
+    </void>
+   </object>
+  </void>
+  <void method="add">
+   <object class="Model.Vinyl">
+    <void property="artist">
+     <string>Touch SomeGrass</string>
+    </void>
+    <void property="borrowedBy">
+     <int>11</int>
+    </void>
+    <void property="id">
+     <int>9</int>
+    </void>
+    <void property="releaseYear">
+     <int>2025</int>
+    </void>
+    <void property="reservedBy">
+     <int>6</int>
+    </void>
+    <void property="state">
+     <object class="States.BorrowedAndReservedState"/>
+    </void>
+    <void property="title">
+     <string>Go Outside</string>
     </void>
    </object>
   </void>
