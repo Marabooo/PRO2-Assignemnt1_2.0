@@ -44,23 +44,23 @@ public class UserSimulator implements Runnable {
       switch (action) {
         case 0:
           // Simulate borrowing
-          viewModel.borrowVinyl(vinyl, user);
           System.out.println("Simulated borrow: " + vinyl.getTitle() + " by " + user.getName());
+          viewModel.borrowVinyl(vinyl, user);
           break;
         case 1:
           // Simulate returning
+          System.out.println("Simulated return: " + vinyl.getTitle() + " by " + user.getName());
           viewModel.returnVinyl(vinyl);
-          System.out.println("Simulated return: " + vinyl);
           break;
         case 2:
           // Simulate reserving
+          System.out.println("Simulated reserve: " + vinyl.getTitle() + " by " + user.getName());
           viewModel.reserveVinyl(vinyl, user);
-          System.out.println("Simulated reserve: " + vinyl + " by " + user);
           break;
         case 3:
           // Simulate unreserving
+          System.out.println("Simulated cancelling reservation: " + vinyl.getTitle() + " by " + user.getName());
           viewModel.unreserveVinyl(vinyl, user);
-          System.out.println("Simulated cancelling reservation: " + vinyl);
           break;
         default:
           break;
