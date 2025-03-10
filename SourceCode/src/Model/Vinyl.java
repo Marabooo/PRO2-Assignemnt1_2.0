@@ -151,40 +151,6 @@ public class Vinyl implements Serializable
     pcs.firePropertyChange("state", oldState, newState);
   }
 
-  // The 4 methods merged:
-  /*
-  public void changeToAvailableState()
-  {
-    VinylState oldState = currentState;
-    currentState = new AvailableState();
-    firePropertyChange("state", oldState, currentState);
-  }
-
-  public void changeToBorrowedState()
-  {
-    VinylState oldState = currentState;
-    currentState = new BorrowedState();
-    firePropertyChange("state", oldState, currentState);
-  }
-
-  public void changeToBorrowedAndReservedState()
-  {
-    VinylState oldState = currentState;
-    currentState = new BorrowedAndReservedState();
-    firePropertyChange("state", oldState, currentState);
-  }
-
-  public void changeToAvailableAndReservedState()
-  {
-    VinylState oldState = currentState;
-    currentState = new AvailableAndReservedState();
-    firePropertyChange("state", oldState, currentState);
-  }
-
-   */
-
-
-
 
 
     //  - Observer Pattern Methods -

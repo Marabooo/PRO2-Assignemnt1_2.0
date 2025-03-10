@@ -106,8 +106,11 @@ public void unreserveVinyl(Vinyl vinyl, User user) {
   }
 
   public void removeVinyl(Vinyl vinyl) {
-    vinylLibrary.removeVinyl(vinyl);
-    saveData();
+    if(vinyl != null && vinyl.getState() instanceof AvailableState && vinyl.isMarkedForRemoval() ){
+      vinylLibrary.removeVinyl(vinyl);
+      saveData();
+    }
+
   }
 
   public StringProperty statusMessageProperty() {
