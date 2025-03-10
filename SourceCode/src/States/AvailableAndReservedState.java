@@ -5,7 +5,8 @@ public class AvailableAndReservedState implements VinylState {
 
   @Override
   public void borrow (Vinyl vinyl, int userId){
-    // Only the reserver can borrow or unreserve
+    // Only the reserver can borrow
+    // Marked for Removal should not impact the reserver borrow their vinyl
     if (userId != vinyl.getReservedBy())
     {
       throw new IllegalStateException("Only the reserver can borrow");
@@ -29,24 +30,17 @@ public class AvailableAndReservedState implements VinylState {
 
   @Override
   public void unreserve (Vinyl vinyl, int userId){
-    if(vinyl.getReservedBy() == null)
-    {
+    // Can only be returned by the reserver
+    if(vinyl.getReservedBy() == null) {
       throw new IllegalStateException("Vinyl is not reserved");
     }
-    if (vinyl.getReservedBy() != userId)
-    {
+    if (vinyl.getReservedBy() != userId) {
       throw new IllegalStateException("Only the reserver can unreserve");
     }
     vinyl.setReservedBy(null);
     vinyl.setState(new AvailableState());
   }
 
-  /*
-  @Override
-  public String getStatus() {
-    return "Available and Reserved";
-  }
-  */
 
   @Override
   public String toString(){

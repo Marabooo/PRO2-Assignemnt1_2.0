@@ -10,10 +10,9 @@ public class BorrowedAndReservedState implements VinylState {
     }
 
     @Override
-    public void returnVinyl(Vinyl vinyl, int userId)
-    {
-      if (vinyl.getBorrowedBy() != userId)
-      {
+    public void returnVinyl(Vinyl vinyl, int userId) {
+      // Can only be returned by the following user
+      if (vinyl.getBorrowedBy() != userId) {
         throw new IllegalArgumentException("Vinyl is not borrowed by this user");
       }
       vinyl.setBorrowedBy(null);
@@ -27,6 +26,7 @@ public class BorrowedAndReservedState implements VinylState {
     }
 
     public void unreserve(Vinyl vinyl, int userId) {
+      // Only by the reserving user
       if (vinyl.getReservedBy() != userId) {
         throw new IllegalArgumentException("Vinyl was not reserved by this user");
       }
@@ -34,11 +34,6 @@ public class BorrowedAndReservedState implements VinylState {
       vinyl.setState(new BorrowedState());
     }
 
-    /*
-    @Override
-    public String getStatus(){
-    return "Borrowed and Reserved";
-     */
   @Override
   public String toString() {
     return "Borrowed and Reserved";}

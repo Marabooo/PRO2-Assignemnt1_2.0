@@ -52,7 +52,6 @@ public class Vinyl implements Serializable
     currentState.borrow(this, userId);
   }
 
-
   public void returnVinyl(Integer userId){
     if(borrowedBy == null || !borrowedBy.equals(userId)){
       throw new IllegalStateException("Cannot return vinyl. It is not borrowed by this user.");
@@ -63,6 +62,7 @@ public class Vinyl implements Serializable
   public void reserve(Integer userId){
     currentState.reserve(this, userId);
   }
+
   public void unreserve(Integer userId){
     currentState.unreserve(this, userId);
   }
