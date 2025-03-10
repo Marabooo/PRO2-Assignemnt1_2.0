@@ -1,8 +1,5 @@
 package ViewModel;
 
-//this code not done yet, still testing
-
-
 import Model.*;
 import States.*;
 import Storage.XMLStorage;
@@ -23,7 +20,7 @@ public class VinylViewModel {
 
   public VinylViewModel(VinylLibrary library) {
     this.vinylLibrary = library;
-    this.vinyls.addAll(library.getVinyls()); // add all vinyls from the library
+    this.vinyls.addAll(library.getVinyls());
  addPropertyChangeListeners();
   }
 
@@ -50,10 +47,6 @@ public class VinylViewModel {
     updateVinyls();
     saveData();
   }
-  public int getUserId()
-  {
-    return 0;
-  }
 
 public void unreserveVinyl(Vinyl vinyl, User user) {
     if (vinyl != null) {
@@ -71,7 +64,6 @@ public void unreserveVinyl(Vinyl vinyl, User user) {
         saveData();
       }
    }
-
 
   public void borrowVinyl(Vinyl vinyl, User user) {
     if (vinyl != null) {
@@ -133,7 +125,6 @@ public void unreserveVinyl(Vinyl vinyl, User user) {
       });
     }
   }
-
 
   public void updateVinyls() {
     vinyls.setAll(vinylLibrary.getVinyls());

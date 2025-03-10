@@ -41,5 +41,4 @@ public class AvailableState implements VinylState {
   public String toString() {
     return "Available";
   }
-
 }

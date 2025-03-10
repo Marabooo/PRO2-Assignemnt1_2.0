@@ -200,13 +200,12 @@ public class Vinyl implements Serializable
         reservedBy, borrowedBy, isMarkedForRemoval, pcs);
   }
 
+
   //
-   // Testing/Utility Methods
-  //
+ // Testing/Utility Methods
+//
 
   public static void resetCounter() {
     nextId = 1;
   }
-  // Mara and Ana
-
 }

@@ -64,10 +64,7 @@ public class Main extends Application {
     simulationThread.setDaemon(true);  // so it doesn't block application exit
     simulationThread.start();
 
-    //FXMLLoader loader = new FXMLLoader(getClass().getResource("/View/VinylLibrary.fxml"));
-   // Parent root = loader.load();
-   // VinylViewController controller = loader.getController();
-   //controller.initViewModel(viewModel);
+
     FXMLLoader loader = null;
     Parent root = null;
     try
@@ -94,17 +91,11 @@ public class Main extends Application {
       XMLStorage.saveVinylsToXML("vinyls.xml", library.getVinylList());
       XMLStorage.saveUsersToXML("users.xml", library.getUsers());
     });
-
-
-    //controller.initViewModel(viewModel);
   }
-
 
   public static void main(String[] args) {
     launch(args);
   }
-
-
 }
 
 

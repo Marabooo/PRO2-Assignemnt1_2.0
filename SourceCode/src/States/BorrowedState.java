@@ -22,7 +22,7 @@ public class BorrowedState implements VinylState
   public void reserve(Vinyl vinyl, int userId)
   {
     // Can only reserve vinyls that are not flagged for removal
-    // Users who have the vinyl should not be able to reserve them (for obvious reasons)
+    // Users who have the vinyl should not be able to reserve them
     if (vinyl.isMarkedForRemoval()) {
       throw new IllegalArgumentException("Vinyl is marked for removal");
     }
