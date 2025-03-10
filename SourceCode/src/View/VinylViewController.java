@@ -63,39 +63,13 @@ public class VinylViewController
   }
 
 
-  //if we add these methods in the viewmodel, it is NOT good, the View directly modifies the Model
-  // The UI should not interact directly with Vinyl.
-  // It should use the ViewModel as an intermediary. Correct - View Controller calls ViewModel
-  public void onBorrowButtonPressed(Vinyl vinyl, User user) {
-    viewModel.borrowVinyl(vinyl, user);
-  }
-
-  public void onReserveButtonPressed(Vinyl vinyl)
-  {
-    viewModel.reserveVinyl(vinyl, User.adminUser);
-  }
-
-  public void onReturnButtonPressed(Vinyl vinyl)
-  {
-    viewModel.returnVinyl(vinyl, User.adminUser);
-  }
-
-  public void onUnreserveButtonPressed(Vinyl vinyl, User user) {
-    viewModel.unreserveVinyl(vinyl, User.adminUser);
-  }
-
-  public void onMarkForRemovalButtonPressed(Vinyl vinyl)
-  {
-    viewModel.markForRemoval(vinyl);
-  }
-
   private void log(String message)
   {
     Platform.runLater(() -> logTextArea.appendText(message + "\n"));
     logger.info(message);
   }
 
-  @FXML public void borrowVinyl()
+  @FXML public void onBorrowVinylButtonPress()
   {
     Vinyl selected = vinylTable.getSelectionModel().getSelectedItem();
 
@@ -109,7 +83,7 @@ public class VinylViewController
     }
   }
 
-  @FXML public void reserveVinyl()
+  @FXML public void onReserveButtonPress()
   {
     Vinyl selected = vinylTable.getSelectionModel().getSelectedItem();
     if (selected != null)
@@ -122,7 +96,7 @@ public class VinylViewController
     }
   }
 
-  @FXML public void returnVinyl()
+  @FXML public void onReturnButtonPress()
   {
     Vinyl selected = vinylTable.getSelectionModel().getSelectedItem();
     if (selected != null)
@@ -135,7 +109,7 @@ public class VinylViewController
     }
   }
 
-  @FXML public void unreserveVinyl()
+  @FXML public void onUnreserveButtonPress()
   {
     Vinyl selected = vinylTable.getSelectionModel().getSelectedItem();
     if (selected != null)
@@ -148,7 +122,7 @@ public class VinylViewController
     }
   }
 
-  @FXML public void markForRemoval()
+  @FXML public void onMarkForRemovalButtonPress()
   {
     Vinyl selected = vinylTable.getSelectionModel().getSelectedItem();
     if (selected != null)
@@ -162,7 +136,7 @@ public class VinylViewController
     }
   }
 
-  @FXML public void unmarkForRemoval()
+  @FXML public void onUnmarkForRemoval()
   {
     Vinyl selected = vinylTable.getSelectionModel().getSelectedItem();
     if (selected != null)
@@ -196,7 +170,7 @@ public class VinylViewController
     }
   }
 
-  @FXML public void removeVinyl()
+  @FXML public void onRemoveVinylButtonPress()
   {
     Vinyl selected = vinylTable.getSelectionModel().getSelectedItem();
     if (selected != null)
