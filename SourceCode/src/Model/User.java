@@ -77,11 +77,5 @@ import java.util.Objects;
     return Objects.hash(name, id);
   }
 
-  //
-  //testing relevant methods
-  //
-//  public static void resetCounter()
-//  {
-//    nextId = 1;
-//  }
+
 }
