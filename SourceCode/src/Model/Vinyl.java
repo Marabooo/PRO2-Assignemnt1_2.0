@@ -135,6 +135,9 @@ public class Vinyl implements Serializable
   public VinylState getState() {
     return currentState;
   }
+  public String getStateString() {
+    return currentState.toString();
+  }
   public boolean isMarkedForRemoval()
   {
     return isMarkedForRemoval;

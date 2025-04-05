@@ -9,6 +9,7 @@ import javafx.collections.ObservableList;
 
 import java.beans.PropertyChangeSupport;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
@@ -17,6 +18,7 @@ import javafx.beans.property.StringProperty;
 public class VinylViewModel {
   private final ObservableList<Vinyl> vinyls = FXCollections.observableArrayList();
   private final VinylLibrary vinylLibrary;
+  private List<VinylDisplay> vinylDisplayList = new ArrayList<>();
   private final StringProperty selectedVinylTitle = new SimpleStringProperty();
   private final StringProperty statusMessage = new SimpleStringProperty();
 
@@ -36,6 +38,17 @@ public class VinylViewModel {
   //Allows the binding of the selected Vinyl’s title to a label or text field in the GUI
   public StringProperty selectedVinylTitleProperty() {
     return selectedVinylTitle;
+  }
+
+  //VinylDisplay related methods
+  private void refreshDisplayList() {
+    vinylDisplayList = vinylLibrary.getVinyls().stream()
+        .map(VinylDisplay::new)
+        .collect(Collectors.toList());
+  }
+
+  public List<VinylDisplay> getVinylDisplayList() {
+    return new ArrayList<>(vinylDisplayList);
   }
 
 
