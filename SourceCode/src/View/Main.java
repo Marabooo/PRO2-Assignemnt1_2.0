@@ -55,7 +55,6 @@ public class Main extends Application {
     XMLStorage.saveVinylsToXML("vinyls.xml", library.getVinyls());
     XMLStorage.saveUsersToXML("users.xml", library.getUsers());
 
-
     // Created ViewModel with the library
     VinylViewModel viewModel = new VinylViewModel(library);
 

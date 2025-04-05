@@ -1,5 +1,7 @@
 package Model;
 
+import States.AvailableState;
+
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.Serial;
@@ -28,27 +30,27 @@ public class VinylLibrary implements Serializable
     pcs.addPropertyChangeListener(listener);
   }
 
-  public void reserveVinyl(int userId, int vinylId) {
-    Vinyl vinyl = findVinylById(vinylId);
-    vinyl.handleReserve(userId);
+  public void reserveVinyl(User u, Vinyl v) {
+    Vinyl vinyl = findVinylById(v.getId());
+    vinyl.handleReserve(u.getId());
     pcs.firePropertyChange("vinylReserved", null, vinyl);
   }
 
-  public void unreserveVinyl(int userId, int vinylId){
-    Vinyl vinyl = findVinylById(vinylId);
-    vinyl.handleUnreserve(userId);
+  public void unreserveVinyl(User u, Vinyl v){
+    Vinyl vinyl = findVinylById(v.getId());
+    vinyl.handleUnreserve(u.getId());
     pcs.firePropertyChange("vinylUnreserved", null, vinyl);
   }
 
-  public void borrowVinyl(int userId, int vinylId){
-    Vinyl vinyl = findVinylById(vinylId);
-    vinyl.handleBorrow(userId);
+  public void borrowVinyl(User u, Vinyl v){
+    Vinyl vinyl = findVinylById(v.getId());
+    vinyl.handleBorrow(u.getId());
     pcs.firePropertyChange("vinylBorrowed", null, vinyl);
   }
 
-  public void returnVinyl(int userId, int vinylId){
-    Vinyl vinyl = findVinylById(vinylId);
-    vinyl.handleReturn(userId);
+  public void returnVinyl(User u, Vinyl v){
+    Vinyl vinyl = findVinylById(v.getId());
+    vinyl.handleReturn(u.getId());
     pcs.firePropertyChange("vinylReturned", null, vinyl);
   }
 
@@ -61,17 +63,18 @@ public class VinylLibrary implements Serializable
     return null;
   }
 
-  public void markForRemoval(int vinylId) {
-    Vinyl vinyl = findVinylById(vinylId);
+  public void markForRemoval(Vinyl v) {
+    Vinyl vinyl = findVinylById(v.getId());
     vinyl.markForRemoval();
     pcs.firePropertyChange("vinylMarkedForRemoval", null, vinyl);
   }
 
-  public void unmarkForRemoval(int vinylId) {
-    Vinyl vinyl = findVinylById(vinylId);
+  public void unmarkForRemoval(Vinyl v) {
+    Vinyl vinyl = findVinylById(v.getId());
     vinyl.unmarkForRemoval();
     pcs.firePropertyChange("vinylUnmarkedForRemoval", null, vinyl);
   }
+
 
 
   public List<Vinyl> getVinyls() {
@@ -103,16 +106,18 @@ public class VinylLibrary implements Serializable
     this.vinyls.add(vinyl);
   }
 
-  /*public String getVinylsAsString(Vinyl vinyl) {
-    return vinyl.toString();
-  }*/
-
   public void removeVinyl(Vinyl vinyl) {
-    if (!vinyl.isMarkedForRemoval()) {
+    if (vinyl == null || !vinyl.isMarkedForRemoval() || !(vinyl.getState() instanceof AvailableState)) {
       throw new IllegalArgumentException("Vinyl is not marked for removal");
     }
     this.vinyls.remove(vinyl);
   }
+
+  /*public String getVinylsAsString(Vinyl vinyl) {
+    return vinyl.toString();
+  }*/
+
+
 
   //public List<Vinyl> getVinylList()
   //{

@@ -11,8 +11,7 @@ public class BorrowedState implements VinylState
   public void returnVinyl(Vinyl vinyl, int userId)
   {
     // Can be returned only by the borrowing user
-    if (vinyl.getBorrowedBy() != userId)
-    {
+    if (vinyl.getBorrowedBy() != userId) {
       throw new IllegalArgumentException("Vinyl is not borrowed by this user");
     }
     vinyl.setBorrowedBy(null);
