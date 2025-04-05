@@ -151,7 +151,6 @@ public void unreserveVinylVM(Vinyl vinyl, User user) {
   }
 */
 
-
   public void updateVinyls() {
     vinyls.setAll(vinylLibrary.getVinyls());
 
