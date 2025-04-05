@@ -76,7 +76,7 @@ public class VinylViewController
     if (selected != null)
     {
       new Thread(() -> {
-        viewModel.borrowVinyl(selected, User.adminUser);
+        viewModel.borrowVinylVM(selected, User.adminUser);
         log( "Vinyl: " +  selected.getTitle() + " Borrowed by: " + User.adminUser.getName());
         Platform.runLater(this::updateUI);
       }).start();
@@ -89,7 +89,7 @@ public class VinylViewController
     if (selected != null)
     {
       new Thread(() -> {
-        viewModel.reserveVinyl(selected, User.adminUser);
+        viewModel.reserveVinylVM(selected, User.adminUser);
         log( "Vinyl: " +  selected.getTitle() + " Reserved by: " + User.adminUser.getName());
         Platform.runLater(this::updateUI);
       }).start();
@@ -102,7 +102,7 @@ public class VinylViewController
     if (selected != null)
     {
       new Thread(() -> {
-        viewModel.returnVinyl(selected, User.adminUser);
+        viewModel.returnVinylVM(selected, User.adminUser);
         log( "Vinyl: " +  selected.getTitle() + " Returned by: " + User.adminUser.getName());
         Platform.runLater(this::updateUI);
       }).start();
@@ -115,7 +115,7 @@ public class VinylViewController
     if (selected != null)
     {
       new Thread(() -> {
-        viewModel.unreserveVinyl(selected, User.adminUser);
+        viewModel.unreserveVinylVM(selected, User.adminUser);
         log("Unreserved vinyl: " + selected.getTitle());
         Platform.runLater(this::updateUI);
       }).start();
@@ -128,7 +128,7 @@ public class VinylViewController
     if (selected != null)
     {
       new Thread(() -> {
-        viewModel.markForRemoval(selected);
+        viewModel.markForRemovalVM(selected);
         log( "Vinyl: " +  selected.getTitle() + " Marked for removal by: " + User.adminUser.getName());
         Platform.runLater(
             this::updateUI); //method is called on the JavaFX Application Thread
@@ -142,7 +142,7 @@ public class VinylViewController
     if (selected != null)
     {
       new Thread(() -> {
-        viewModel.unmarkForRemoval(selected);
+        viewModel.unmarkForRemovalVM(selected);
         log( "Vinyl: " +  selected.getTitle() + " Unmarked for removal: by: " + User.adminUser.getName());
         Platform.runLater(this::updateUI);
       }).start();
@@ -176,7 +176,7 @@ public class VinylViewController
     if (selected != null)
     {
       new Thread(() -> {
-        viewModel.removeVinyl(selected);
+        viewModel.removeVinylVM(selected);
         log( "Vinyl: " +  selected.getTitle() + " Removed by: " + User.adminUser.getName());
         Platform.runLater(() -> {
           vinylTable.getItems()

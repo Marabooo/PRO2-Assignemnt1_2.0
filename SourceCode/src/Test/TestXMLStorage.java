@@ -29,7 +29,7 @@ public class TestXMLStorage {
 
     // Save the library data to XML files.
     // Using getVinylList() which returns the internal list.
-    XMLStorage.saveVinylsToXML("test_vinyls.xml", testLibrary.getVinylList());
+    XMLStorage.saveVinylsToXML("test_vinyls.xml", testLibrary.getVinyls());
     XMLStorage.saveUsersToXML("test_users.xml", testLibrary.getUsers());
 
     // Load the data back from the XML files.

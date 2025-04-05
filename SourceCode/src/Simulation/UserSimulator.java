@@ -29,7 +29,7 @@ public class UserSimulator implements Runnable {
         break;
       }
 
-      List<Vinyl> vinyls = library.getVinylList();
+      List<Vinyl> vinyls = library.getVinyls();
       List<User> users = library.getUsers();
 
       if (vinyls.isEmpty() || users.isEmpty()) {
@@ -47,7 +47,7 @@ public class UserSimulator implements Runnable {
           // Simulate borrowing.
           System.out.println("Simulated borrow: " + vinyl.getTitle() + " by " + user.getName());
           try {
-            viewModel.borrowVinyl(vinyl, user);
+            viewModel.borrowVinylVM(vinyl, user);
             System.out.println("Borrow action successful.");
           } catch (Exception e) {
             System.out.println("Borrow action failed: " + e.getMessage());
@@ -57,7 +57,7 @@ public class UserSimulator implements Runnable {
           // Simulate returning.
           System.out.println("Simulated return: " + vinyl.getTitle() + " by " + user.getName());
           try {
-            viewModel.returnVinyl(vinyl, user);
+            viewModel.returnVinylVM(vinyl, user);
             System.out.println("Return action successful.");
           } catch (Exception e) {
             System.out.println("Return action failed: " + e.getMessage());
@@ -67,7 +67,7 @@ public class UserSimulator implements Runnable {
           // Simulate reserving.
           System.out.println("Simulated reserve: " + vinyl.getTitle() + " by " + user.getName());
           try {
-            viewModel.reserveVinyl(vinyl, user);
+            viewModel.reserveVinylVM(vinyl, user);
             System.out.println("Reserve action successful.");
           } catch (Exception e) {
             System.out.println("Reserve action failed: " + e.getMessage());
@@ -77,7 +77,7 @@ public class UserSimulator implements Runnable {
           // Simulate unreserving.
           System.out.println("Simulated cancelling reservation: " + vinyl.getTitle() + " by " + user.getName());
           try {
-            viewModel.unreserveVinyl(vinyl, user);
+            viewModel.unreserveVinylVM(vinyl, user);
             System.out.println("Unreserve action successful.");
           } catch (Exception e) {
             System.out.println("Unreserve action failed: " + e.getMessage());

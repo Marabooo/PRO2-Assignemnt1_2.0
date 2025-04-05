@@ -12,7 +12,8 @@ public class AvailableAndReservedState implements VinylState {
       throw new IllegalStateException("Only the reserver can borrow");
     }
       vinyl.setBorrowedBy(userId);
-      vinyl.unreserve(userId);
+      vinyl.setReservedBy(null);
+      //vinyl.unreserve(userId);
       vinyl.setState(new BorrowedState());
 
   }

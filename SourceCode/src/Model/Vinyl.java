@@ -48,7 +48,7 @@ public class Vinyl implements Serializable
    // - State Delegation Methods -
   //
 
-  public void borrow(Integer userId){
+  /*public void borrow(Integer userId){
     currentState.borrow(this, userId);
   }
 
@@ -57,15 +57,26 @@ public class Vinyl implements Serializable
       throw new IllegalStateException("Cannot return vinyl. It is not borrowed by this user.");
     }
     currentState.returnVinyl(this, borrowedBy);
-  }
+  }*/
 
-  public void reserve(Integer userId){
+
+  void handleReserve(int userId){
     currentState.reserve(this, userId);
   }
 
-  public void unreserve(Integer userId){
+  void handleUnreserve(Integer userId){
     currentState.unreserve(this, userId);
   }
+
+  void handleBorrow(int userId){
+    currentState.borrow(this, userId);
+  }
+
+  void handleReturn(int userId){
+    currentState.returnVinyl(this, userId);
+  }
+
+
 
     //
    // - Flagged for Removal Methods
@@ -74,13 +85,13 @@ public class Vinyl implements Serializable
   public void markForRemoval(){
     if(!isMarkedForRemoval){
       isMarkedForRemoval = true;
-      firePropertyChange("markedForRemoval", false, true);
+      //firePropertyChange("markedForRemoval", false, true);
     }
   }
   public void unmarkForRemoval(){
     if (isMarkedForRemoval){
       isMarkedForRemoval = false;
-      firePropertyChange("markedForRemoval", true, false);
+      //firePropertyChange("markedForRemoval", true, false);
     }
   }
 
@@ -134,21 +145,21 @@ public class Vinyl implements Serializable
   //
 
   public void setReservedBy(Integer userId){
-    Integer old = this.reservedBy;
+    //Integer old = this.reservedBy;
     this.reservedBy = userId;
-    pcs.firePropertyChange("reservedBy", old, userId);
+    //pcs.firePropertyChange("reservedBy", old, userId);
   }
 
   public void setBorrowedBy(Integer userId) {
-    Integer old = this.borrowedBy;
+    //Integer old = this.borrowedBy;
     this.borrowedBy = userId;
-    pcs.firePropertyChange("borrowedBy", old, userId);
+    //pcs.firePropertyChange("borrowedBy", old, userId);
   }
 
   public void setState(VinylState newState){
-   VinylState  oldState = this.currentState;
+    //VinylState oldState = this.currentState;
     this.currentState = newState;
-    pcs.firePropertyChange("state", oldState, newState);
+    //pcs.firePropertyChange("state", oldState, newState);
   }
 
 
@@ -157,17 +168,17 @@ public class Vinyl implements Serializable
    // allows us to implement the Observer Pattern and separate the application logic from the graphical interface.
   //
 
-  public void addPropertyChangeListener(PropertyChangeListener listener) {
-    pcs.addPropertyChangeListener(listener);
-  }
+  //public void addPropertyChangeListener(PropertyChangeListener listener) {
+  //  pcs.addPropertyChangeListener(listener);
+  //}
 
   public void removePropertyChangeListener(PropertyChangeListener listener) {
-    pcs.removePropertyChangeListener(listener);
+    //pcs.removePropertyChangeListener(listener);
   }
 
   // Notify listeners about the change
   public void firePropertyChange(String propertyName, Object oldValue, Object newValue) {
-    pcs.firePropertyChange(propertyName, oldValue, newValue);
+    //pcs.firePropertyChange(propertyName, oldValue, newValue);
   }
 
 
@@ -181,7 +192,7 @@ public class Vinyl implements Serializable
         + ", releaseYear=" + this.getReleaseYear() + ", id=" + this.getId() + ", state=" + currentState + '}';
   }
 
-  @Override public boolean equals(Object o)
+  /*@Override public boolean equals(Object o)
   {
     if (o == null || getClass() != o.getClass())
       return false;
@@ -199,7 +210,7 @@ public class Vinyl implements Serializable
     return Objects.hash(title, artist, releaseYear, currentState, id,
         reservedBy, borrowedBy, isMarkedForRemoval, pcs);
   }
-
+*/
 
   //
  // Testing/Utility Methods

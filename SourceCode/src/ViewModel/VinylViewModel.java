@@ -6,6 +6,8 @@ import Storage.XMLStorage;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+
+import java.beans.PropertyChangeSupport;
 import java.util.*;
 
 import javafx.beans.property.SimpleStringProperty;
@@ -18,10 +20,12 @@ public class VinylViewModel {
   private final StringProperty selectedVinylTitle = new SimpleStringProperty();
   private final StringProperty statusMessage = new SimpleStringProperty();
 
+  private transient PropertyChangeSupport pcs = new PropertyChangeSupport(this);
+
+
   public VinylViewModel(VinylLibrary library) {
     this.vinylLibrary = library;
     this.vinyls.addAll(library.getVinyls());
- addPropertyChangeListeners();
   }
 
   //Expose Vinyl List to the View / binding
@@ -48,14 +52,14 @@ public class VinylViewModel {
     saveData();
   }
 
-public void unreserveVinyl(Vinyl vinyl, User user) {
+public void unreserveVinylVM(Vinyl vinyl, User user) {
     if (vinyl != null) {
-      vinyl.unreserve(user.getId());
+      vinylLibrary.unreserveVinyl(user.getId(), vinyl.getId());
       updateVinyls();
       saveData();
     }
   }
-   public void unmarkForRemoval(Vinyl vinyl)
+   public void unmarkForRemovalVM(Vinyl vinyl)
    {
       if (vinyl != null)
       {
@@ -65,31 +69,32 @@ public void unreserveVinyl(Vinyl vinyl, User user) {
       }
    }
 
-  public void borrowVinyl(Vinyl vinyl, User user) {
+  public void borrowVinylVM(Vinyl vinyl, User user) {
     if (vinyl != null) {
-      vinyl.borrow(user.getId());
+      vinylLibrary.borrowVinyl(user.getId(), vinyl.getId());
       updateVinyls();
       saveData();
     }
   }
 
-  public void reserveVinyl(Vinyl vinyl, User user) {
+  public void reserveVinylVM(Vinyl vinyl, User user) {
     if (vinyl != null) {
-      vinyl.reserve(user.getId());
+      vinylLibrary.reserveVinyl(user.getId(), vinyl.getId());
       updateVinyls();
       saveData();
     }
   }
-  public void returnVinyl(Vinyl vinyl, User user) {
+
+  public void returnVinylVM(Vinyl vinyl, User user) {
     if (vinyl == null || user.getId() != vinyl.getBorrowedBy()) {
       throw new IllegalArgumentException("Vinyl is not borrowed by this user");
     }
-      vinyl.returnVinyl(vinyl.getBorrowedBy());
+      vinylLibrary.returnVinyl(vinyl.getBorrowedBy(), vinyl.getId());
       updateVinyls();
       saveData();
     }
 
-  public void markForRemoval(Vinyl vinyl) {
+  public void markForRemovalVM(Vinyl vinyl) {
     if (vinyl != null) {
       vinyl.markForRemoval();
       updateVinyls();
@@ -97,7 +102,7 @@ public void unreserveVinyl(Vinyl vinyl, User user) {
     }
   }
 
-  public void removeVinyl(Vinyl vinyl) {
+  public void removeVinylVM(Vinyl vinyl) {
     if(vinyl != null && vinyl.getState() instanceof AvailableState && vinyl.isMarkedForRemoval() ){
       vinylLibrary.removeVinyl(vinyl);
       saveData();
@@ -112,11 +117,13 @@ public void unreserveVinyl(Vinyl vinyl, User user) {
   public void setStatusMessage(String message) {
     Platform.runLater(() -> statusMessage.set(message));
   }
-  private void addPropertyChangeListeners()
+
+  /*private void firePropertyChange()
+
   {
     for (Vinyl vinyl : vinyls)
     {
-      vinyl.addPropertyChangeListener(evt -> {
+      vinylLibrary.addPropertyChangeListener(evt -> {
         // Update an observable property with a description of the event.
         String message =
             "Vinyl " + vinyl.getTitle() + " changed: " + evt.getPropertyName()
@@ -125,10 +132,12 @@ public void unreserveVinyl(Vinyl vinyl, User user) {
       });
     }
   }
+*/
+
 
   public void updateVinyls() {
     vinyls.setAll(vinylLibrary.getVinyls());
-    addPropertyChangeListeners();
+
   }
 
   // Save the data to XML
