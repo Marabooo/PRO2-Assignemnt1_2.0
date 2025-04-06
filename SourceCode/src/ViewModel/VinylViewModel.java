@@ -1,13 +1,11 @@
 package ViewModel;
 
 import Model.*;
-import States.*;
 import Storage.XMLStorage;
 import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.beans.PropertyChangeSupport;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -22,18 +20,21 @@ public class VinylViewModel {
   private final StringProperty selectedVinylTitle = new SimpleStringProperty();
   private final StringProperty statusMessage = new SimpleStringProperty();
 
-  private transient PropertyChangeSupport pcs = new PropertyChangeSupport(this);
-
-
   public VinylViewModel(VinylLibrary library) {
     this.vinylLibrary = library;
     this.vinyls.addAll(library.getVinyls());
   }
 
   //Expose Vinyl List to the View / binding
-  public ObservableList<Vinyl> getVinyls() {
-    return vinyls;
+  public ObservableList<VinylDisplay> getVinylDisplayObservableList() {
+    List<User> users = vinylLibrary.getUsers();
+    return FXCollections.observableArrayList(
+        vinylLibrary.getVinyls().stream()
+            .map(VinylDisplay::new)
+            .toList()
+    );
   }
+
 
   //Allows the binding of the selected Vinyl’s title to a label or text field in the GUI
   public StringProperty selectedVinylTitleProperty() {
@@ -135,21 +136,11 @@ public void unreserveVinylVM(Vinyl vinyl, User user) {
     Platform.runLater(() -> statusMessage.set(message));
   }
 
-  /*private void firePropertyChange()
 
-  {
-    for (Vinyl vinyl : vinyls)
-    {
-      vinylLibrary.addPropertyChangeListener(evt -> {
-        // Update an observable property with a description of the event.
-        String message =
-            "Vinyl " + vinyl.getTitle() + " changed: " + evt.getPropertyName()
-                + " from " + evt.getOldValue() + " to " + evt.getNewValue();
-        setStatusMessage(message);
-      });
-    }
+  public VinylLibrary getVinylLibrary() {
+    return vinylLibrary;
   }
-*/
+
 
   public void updateVinyls() {
     vinyls.setAll(vinylLibrary.getVinyls());

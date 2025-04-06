@@ -31,16 +31,13 @@ public class AddVinylController {
 
     try {
       int releaseYear = Integer.parseInt(releaseYearText);
+      viewModel.addVinyl(title, artist, releaseYear);
 
-      new Thread(() -> {
-        viewModel.addVinyl(title, artist, releaseYear);
-        Platform.runLater(() -> {
-            statusLabel.setText("Vinyl added successfully!");
-            titleField.clear();
-            artistField.clear();
-            releaseYearField.clear();
-        });
-      }).start();
+      // UI update (this must be on FX thread)
+      statusLabel.setText("Vinyl added successfully!");
+      titleField.clear();
+      artistField.clear();
+      releaseYearField.clear();
 
     } catch (NumberFormatException e) {
       statusLabel.setText("Release year must be a number.");
@@ -48,4 +45,5 @@ public class AddVinylController {
       statusLabel.setText("Failed to add vinyl.");
     }
   }
+
 }

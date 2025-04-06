@@ -6,12 +6,17 @@ public class VinylDisplay {
   private final String artist;
   private final String releaseYear;
   private final String status;
+  private final String reservedBy;
+  private final String borrowedBy;
+
 
   public VinylDisplay(Vinyl vinyl) {
     this.title = vinyl.getTitle();
     this.artist = vinyl.getArtist();
     this.releaseYear = String.valueOf(vinyl.getReleaseYear());
     this.status = vinyl.getStateString();
+    this.reservedBy = vinyl.getReservedBy();
+    this.borrowedBy = vinyl.getBorrowedBy();
   }
 
   public String getTitle() {
@@ -29,6 +34,12 @@ public class VinylDisplay {
   public String getStatus() {
     return status;
   }
+
+  public String getReservedBy(){ return reservedBy; }
+
+  public String getBorrowedBy(){ return borrowedBy; }
+
+
 
   @Override
   public String toString() {

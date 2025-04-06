@@ -18,8 +18,8 @@ public class Vinyl implements Serializable
   private static int nextId = 1;
   private int id;
 
-  private Integer reservedBy;
-  private Integer borrowedBy;
+  private String reservedBy;
+  private String borrowedBy;
   private boolean isMarkedForRemoval;
 
   private transient PropertyChangeSupport pcs = new PropertyChangeSupport(this);
@@ -60,20 +60,20 @@ public class Vinyl implements Serializable
   }*/
 
 
-  void handleReserve(int userId){
-    currentState.reserve(this, userId);
+  void handleReserve(String userName){
+    currentState.reserve(this, userName);
   }
 
-  void handleUnreserve(Integer userId){
-    currentState.unreserve(this, userId);
+  void handleUnreserve(String userName){
+    currentState.unreserve(this, userName);
   }
 
-  void handleBorrow(int userId){
-    currentState.borrow(this, userId);
+  void handleBorrow(String userName){
+    currentState.borrow(this, userName);
   }
 
-  void handleReturn(int userId){
-    currentState.returnVinyl(this, userId);
+  void handleReturn(String userName){
+    currentState.returnVinyl(this, userName);
   }
 
 
@@ -117,10 +117,10 @@ public class Vinyl implements Serializable
   public void setReleaseYear(int releaseYear) {
     this.releaseYear = releaseYear;
   }
-  public Integer getReservedBy (){
+  public String getReservedBy (){
     return reservedBy;
   }
-  public Integer getBorrowedBy() { return borrowedBy; };
+  public String getBorrowedBy() { return borrowedBy; };
   public int getId() {
     return id;
   }
@@ -147,15 +147,15 @@ public class Vinyl implements Serializable
    // - Setters (Used by States) -
   //
 
-  public void setReservedBy(Integer userId){
+  public void setReservedBy(String userName){
     //Integer old = this.reservedBy;
-    this.reservedBy = userId;
+    this.reservedBy = userName;
     //pcs.firePropertyChange("reservedBy", old, userId);
   }
 
-  public void setBorrowedBy(Integer userId) {
+  public void setBorrowedBy(String userName) {
     //Integer old = this.borrowedBy;
-    this.borrowedBy = userId;
+    this.borrowedBy = userName;
     //pcs.firePropertyChange("borrowedBy", old, userId);
   }
 

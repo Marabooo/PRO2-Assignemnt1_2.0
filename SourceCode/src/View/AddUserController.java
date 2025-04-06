@@ -18,7 +18,8 @@ public class AddUserController {
     this.viewModel = viewModel;
   }
 
-  @FXML public void addUser() {
+  @FXML
+  public void addUser() {
     String username = usernameField.getText();
 
     if (username.isEmpty()) {
@@ -26,17 +27,13 @@ public class AddUserController {
       return;
     }
 
-    String usernameFieldText = usernameField.getText();
-    new Thread(() -> {
-      try {
-        viewModel.addUser(usernameFieldText);
-        Platform.runLater(() -> {
-          statusLabel.setText("User added successfully!");
-          usernameField.clear();
-        });
-      } catch (IllegalArgumentException e) {
-        Platform.runLater(() -> statusLabel.setText("Failed to add user."));
-      }
-    }).start();
+    try {
+      viewModel.addUser(username);
+      statusLabel.setText("User added successfully!");
+      usernameField.clear();
+    } catch (IllegalArgumentException e) {
+      statusLabel.setText("Failed to add user.");
+    }
   }
+
 }
